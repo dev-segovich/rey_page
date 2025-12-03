@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemisferio Matemático - Lógica y Razón</title>
+    <meta name="description" content="Explora el lado matemático: lógica, análisis y razón">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght:400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #00d4ff;
+            --secondary-blue: #0099ff;
+            --accent-cyan: #00fff7;
+            --dark-bg: #0a0a0f;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: radial-gradient(circle at top left, #001a1f, var(--dark-bg));
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background with Grid */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.2;
+            background-image: 
+                linear-gradient(var(--primary-blue) 1px, transparent 1px),
+                linear-gradient(90deg, var(--primary-blue) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 80% 20%, var(--primary-blue) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, var(--secondary-blue) 0%, transparent 50%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 212, 255, 0.4);
+            transform: translateX(-5px);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px var(--primary-blue)); }
+            50% { filter: drop-shadow(0 0 30px var(--primary-blue)); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--primary-blue);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-blue);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 212, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
+            border-color: var(--accent-cyan);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation: rotate 10s linear infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mathematical Symbols Background */
+        .math-symbols {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            pointer-events: none;
+        }
+
+        .symbol {
+            position: absolute;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Features List */
+        .features {
+            margin-top: 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .features h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        }
+
+        .features-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-tag {
+            padding: 1rem 2rem;
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50px;
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-tag:hover {
+            background: rgba(0, 212, 255, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+
+            .math-symbols {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="bg-overlay"></div>
+    
+    <!-- Mathematical Symbols -->
+    <div class="math-symbols">
+        <div class="symbol" style="top: 10%; left: 15%;">∑</div>
+        <div class="symbol" style="top: 20%; right: 20%; animation-delay: 1s;">∫</div>
+        <div class="symbol" style="top: 60%; left: 10%; animation-delay: 2s;">π</div>
+        <div class="symbol" style="bottom: 20%; right: 15%; animation-delay: 3s;">∞</div>
+        <div class="symbol" style="top: 40%; left: 30%; animation-delay: 4s;">√</div>
+        <div class="symbol" style="top: 70%; right: 25%; animation-delay: 5s;">∆</div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">
+                <span>←</span> Volver
+            </a>
+            
+            <h1>HEMISFERIO MATEMÁTICO</h1>
+            <p class="subtitle">Lógica • Análisis • Razón</p>
+            <p class="description">
+                Bienvenido al mundo del pensamiento lógico, donde los números cuentan historias 
+                y cada problema tiene una solución elegante esperando ser descubierta.
+            </p>
+        </header>
+
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h3>Pensamiento Lógico</h3>
+                <p>
+                    Desarrolla tu capacidad de razonamiento estructurado. Cada decisión 
+                    se basa en datos, análisis y metodología científica.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Análisis de Datos</h3>
+                <p>
+                    Convierte información en conocimiento. Los números revelan patrones 
+                    ocultos que guían decisiones inteligentes y precisas.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🧮</div>
+                <h3>Resolución de Problemas</h3>
+                <p>
+                    Aplica métodos sistemáticos para resolver desafíos complejos. 
+                    La razón y la lógica son tus herramientas más poderosas.
+                </p>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>Desarrolla tus habilidades analíticas</h2>
+            <div class="features-list">
+                <div class="feature-tag">Matemáticas</div>
+                <div class="feature-tag">Programación</div>
+                <div class="feature-tag">Análisis Crítico</div>
+                <div class="feature-tag">Pensamiento Estratégico</div>
+                <div class="feature-tag">Ciencia de Datos</div>
+                <div class="feature-tag">Algoritmos</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth entrance animation
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+            document.body.style.transition = 'opacity 1s ease';
+            document.body.style.opacity = '1';
+        }, 100);
+
+        // Parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth - 0.5;
+            const y = e.clientY / window.innerHeight - 0.5;
+            
+            document.querySelector('.bg-overlay').style.transform = 
+                `translate(${x * 20}px, ${y * 20}px)`;
+            
+            // Move mathematical symbols
+            const symbols = document.querySelectorAll('.symbol');
+            symbols.forEach((symbol, index) => {
+                const speed = (index + 1) * 5;
+                symbol.style.transform = 
+                    `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+
+        // Binary rain effect (optional enhancement)
+        function createBinaryRain() {
+            const binary = document.createElement('div');
+            binary.textContent = Math.random() > 0.5 ? '1' : '0';
+            binary.style.position = 'fixed';
+            binary.style.top = '-20px';
+            binary.style.left = Math.random() * window.innerWidth + 'px';
+            binary.style.color = 'var(--primary-blue)';
+            binary.style.opacity = '0.3';
+            binary.style.fontSize = '1rem';
+            binary.style.zIndex = '1';
+            binary.style.pointerEvents = 'none';
+            binary.style.transition = 'top 3s linear, opacity 3s linear';
+            
+            document.body.appendChild(binary);
+            
+            setTimeout(() => {
+                binary.style.top = window.innerHeight + 'px';
+                binary.style.opacity = '0';
+            }, 10);
+            
+            setTimeout(() => {
+                binary.remove();
+            }, 3000);
+        }
+
+        // Create binary rain periodically
+        setInterval(createBinaryRain, 200);
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Interface - Descubre tu lado</title>
+    <meta name="description" content="Explora los hemisferios de tu mente: creatividad o lógica matemática">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Particles Background -->
+        <canvas id="particles"></canvas>
+        
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1 class="main-title">
+                <span class="glitch" data-text="BRAIN">BRAIN</span>
+                <span class="glitch" data-text="INTERFACE">INTERFACE</span>
+            </h1>
+            <p class="subtitle">Elige tu camino mental</p>
+        </div>
+
+        <!-- Brain Container -->
+        <div class="brain-container">
+            <svg class="brain-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Gradients for Left Hemisphere (Mathematical) -->
+                    <linearGradient id="leftGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#0099ff;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0066ff;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <!-- Gradients for Right Hemisphere (Creative) -->
+                    <linearGradient id="rightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff006e;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#ff4d9c;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ff80bf;stop-opacity:1" />
+                    </linearGradient>
+
+                    <!-- Glow Filters -->
+                    <filter id="glow-blue">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    
+                    <filter id="glow-pink">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- Left Hemisphere (Mathematical) -->
+                <g id="left-hemisphere" class="hemisphere" data-side="left">
+                    <!-- Main Lobe -->
+                    <path class="brain-path left-path" d="
+                        M 400 300
+                        Q 320 250, 280 200
+                        Q 260 170, 240 150
+                        Q 220 130, 200 120
+                        Q 180 110, 160 110
+                        Q 140 110, 130 120
+                        Q 120 130, 120 150
+                        Q 120 180, 130 210
+                        Q 140 240, 160 270
+                        Q 180 300, 200 330
+                        Q 220 360, 240 390
+                        Q 260 420, 280 440
+                        Q 300 460, 320 470
+                        Q 340 480, 360 485
+                        Q 380 490, 400 490
+                        L 400 300 Z
+                    " fill="url(#leftGradient)" filter="url(#glow-blue)"/>
+                    
+                    <!-- Neural Connections -->
+                    <circle class="neuron" cx="180" cy="150" r="3" fill="#00d4ff"/>
+                    <circle class="neuron" cx="220" cy="180" r="2.5" fill="#00d4ff"/>
+                    <circle class="neuron" cx="160" cy="200" r="3" fill="#00d4ff"/>
+                    <circle class="neuron" cx="200" cy="250" r="2" fill="#00d4ff"/>
+                    <circle class="neuron" cx="240" cy="300" r="3" fill="#00d4ff"/>
+                    <circle class="neuron" cx="180" cy="350" r="2.5" fill="#00d4ff"/>
+                    <circle class="neuron" cx="220" cy="400" r="2" fill="#00d4ff"/>
+                    <circle class="neuron" cx="280" cy="420" r="3" fill="#00d4ff"/>
+                    
+                    <!-- Synaptic Lines -->
+                    <line class="synapse" x1="180" y1="150" x2="220" y2="180" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="220" y1="180" x2="160" y2="200" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="160" y1="200" x2="200" y2="250" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="200" y1="250" x2="240" y2="300" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="240" y1="300" x2="180" y2="350" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="180" y1="350" x2="220" y2="400" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="220" y1="400" x2="280" y2="420" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+                </g>
+
+                <!-- Right Hemisphere (Creative) -->
+                <g id="right-hemisphere" class="hemisphere" data-side="right">
+                    <!-- Main Lobe -->
+                    <path class="brain-path right-path" d="
+                        M 400 300
+                        Q 480 250, 520 200
+                        Q 540 170, 560 150
+                        Q 580 130, 600 120
+                        Q 620 110, 640 110
+                        Q 660 110, 670 120
+                        Q 680 130, 680 150
+                        Q 680 180, 670 210
+                        Q 660 240, 640 270
+                        Q 620 300, 600 330
+                        Q 580 360, 560 390
+                        Q 540 420, 520 440
+                        Q 500 460, 480 470
+                        Q 460 480, 440 485
+                        Q 420 490, 400 490
+                        L 400 300 Z
+                    " fill="url(#rightGradient)" filter="url(#glow-pink)"/>
+                    
+                    <!-- Neural Connections -->
+                    <circle class="neuron" cx="620" cy="150" r="3" fill="#ff006e"/>
+                    <circle class="neuron" cx="580" cy="180" r="2.5" fill="#ff006e"/>
+                    <circle class="neuron" cx="640" cy="200" r="3" fill="#ff006e"/>
+                    <circle class="neuron" cx="600" cy="250" r="2" fill="#ff006e"/>
+                    <circle class="neuron" cx="560" cy="300" r="3" fill="#ff006e"/>
+                    <circle class="neuron" cx="620" cy="350" r="2.5" fill="#ff006e"/>
+                    <circle class="neuron" cx="580" cy="400" r="2" fill="#ff006e"/>
+                    <circle class="neuron" cx="520" cy="420" r="3" fill="#ff006e"/>
+                    
+                    <!-- Synaptic Lines -->
+                    <line class="synapse" x1="620" y1="150" x2="580" y2="180" stroke="#ff006e" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="580" y1="180" x2="640" y2="200" stroke="#ff006e" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="640" y1="200" x2="600" y2="250" stroke="#ff006e" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="600" y1="250" x2="560" y2="300" stroke="#ff006e" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="560" y1="300" x2="620" y2="350" stroke="#ff006e" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="620" y1="350" x2="580" y2="400" stroke="#ff006e" stroke-width="0.5" opacity="0.6"/>
+                    <line class="synapse" x1="580" y1="400" x2="520" y2="420" stroke="#ff006e" stroke-width="0.5" opacity="0.6"/>
+                </g>
+
+                <!-- Center Line (Corpus Callosum) -->
+                <line class="corpus-callosum" x1="400" y1="120" x2="400" y2="490" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+            </svg>
+
+            <!-- Interactive Labels -->
+            <div class="label label-left">
+                <div class="label-content">
+                    <h2>MATEMÁTICO</h2>
+                    <p>Lógica • Análisis • Razón</p>
+                </div>
+            </div>
+
+            <div class="label label-right">
+                <div class="label-content">
+                    <h2>CREATIVO</h2>
+                    <p>Arte • Imaginación • Intuición</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <p class="pulse-text">Haz click en un hemisferio para comenzar</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
