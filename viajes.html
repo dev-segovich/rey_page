@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotos y Viajes - Captura tus Aventuras</title>
+    <meta name="description" content="Explora el mundo a través de la fotografía y los viajes">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-magenta: #d946ef;
+            --secondary-purple: #a855f7;
+            --accent-violet: #8b5cf6;
+            --accent-pink: #ec4899;
+            --dark-bg: #0f1419;
+            --darker-bg: #0a0d11;
+            --white: #ffffff;
+            --text-light: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: radial-gradient(circle at top right, #2d1b47, var(--dark-bg));
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.2;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(217, 70, 239, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.2; }
+            50% { transform: scale(1.15) rotate(5deg); opacity: 0.35; }
+        }
+
+        /* Camera flash effect overlay */
+        .flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: flash 10s ease-in-out infinite;
+        }
+
+        @keyframes flash {
+            0%, 90%, 100% { opacity: 0; }
+            95% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(217, 70, 239, 0.15);
+            border: 2px solid var(--primary-magenta);
+            border-radius: 50px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(217, 70, 239, 0.3);
+            transform: translateX(-5px);
+            box-shadow: 0 0 30px rgba(217, 70, 239, 0.5);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-purple), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(217, 70, 239, 0.6)); }
+            50% { filter: drop-shadow(0 0 35px rgba(217, 70, 239, 0.9)); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--primary-magenta);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: rgba(217, 70, 239, 0.08);
+            border: 2px solid var(--primary-magenta);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(217, 70, 239, 0.15),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(217, 70, 239, 0.3);
+            border-color: var(--accent-pink);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 5px 15px rgba(217, 70, 239, 0.4));
+            position: relative;
+            z-index: 1;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-magenta);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(217, 70, 239, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Travel Icons Background */
+        .travel-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.08;
+            font-size: 2.5rem;
+            color: var(--primary-magenta);
+            pointer-events: none;
+        }
+
+        .icon {
+            position: absolute;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-30px) rotate(15deg) scale(1.1); }
+        }
+
+        /* Features List */
+        .features {
+            margin-top: 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .features h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--primary-magenta);
+            margin-bottom: 3rem;
+            text-shadow: 0 0 25px rgba(217, 70, 239, 0.5);
+        }
+
+        .features-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-tag {
+            padding: 1rem 2rem;
+            background: rgba(217, 70, 239, 0.15);
+            border: 2px solid var(--primary-magenta);
+            border-radius: 50px;
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-tag:hover {
+            background: rgba(217, 70, 239, 0.3);
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 0 25px rgba(217, 70, 239, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+
+            .travel-icons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="flash-overlay"></div>
+    
+    <!-- Travel Icons -->
+    <div class="travel-icons">
+        <div class="icon" style="top: 10%; left: 15%;">📷</div>
+        <div class="icon" style="top: 20%; right: 20%; animation-delay: 1s;">✈️</div>
+        <div class="icon" style="top: 60%; left: 10%; animation-delay: 2s;">🌍</div>
+        <div class="icon" style="bottom: 20%; right: 15%; animation-delay: 3s;">🏔️</div>
+        <div class="icon" style="top: 40%; left: 30%; animation-delay: 4s;">🎒</div>
+        <div class="icon" style="top: 70%; right: 25%; animation-delay: 5s;">🗺️</div>
+        <div class="icon" style="top: 30%; right: 40%; animation-delay: 6s;">🌅</div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">
+                <span>←</span> Volver
+            </a>
+            
+            <h1>FOTOS Y VIAJES</h1>
+            <p class="subtitle">Aventura • Fotografía • Exploración</p>
+            <p class="description">
+                Descubre el mundo a través del lente. Cada destino es una historia por contar 
+                y cada fotografía captura un momento único e irrepetible.
+            </p>
+        </header>
+
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-icon">📷</div>
+                <h3>Fotografía de Viajes</h3>
+                <p>
+                    Captura la esencia de cada destino. Desde paisajes impresionantes 
+                    hasta retratos culturales que cuentan historias sin palabras.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌍</div>
+                <h3>Destinos Únicos</h3>
+                <p>
+                    Explora lugares extraordinarios alrededor del mundo. Desde 
+                    montañas majestuosas hasta playas paradisíacas y ciudades vibrantes.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>Edición Creativa</h3>
+                <p>
+                    Transforma tus fotografías en obras de arte. Técnicas profesionales 
+                    de edición que realzan la belleza natural de cada imagen.
+                </p>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>Experiencias de Viaje</h2>
+            <div class="features-list">
+                <div class="feature-tag">Fotografía Profesional</div>
+                <div class="feature-tag">Viajes de Aventura</div>
+                <div class="feature-tag">Culturas del Mundo</div>
+                <div class="feature-tag">Paisajes Naturales</div>
+                <div class="feature-tag">Street Photography</div>
+                <div class="feature-tag">Documentales Visuales</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth entrance animation
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+            document.body.style.transition = 'opacity 1s ease';
+            document.body.style.opacity = '1';
+        }, 100);
+
+        // Parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth - 0.5;
+            const y = e.clientY / window.innerHeight - 0.5;
+            
+            document.querySelector('.bg-animation').style.transform = 
+                `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
+            
+            // Move travel icons with different speeds
+            const icons = document.querySelectorAll('.icon');
+            icons.forEach((icon, index) => {
+                const speed = (index + 1) * 6;
+                icon.style.transform = 
+                    `translate(${x * speed}px, ${y * speed}px) rotate(${x * 20}deg)`;
+            });
+        });
+
+        // Camera shutter effect on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (Math.abs(scrollTop - lastScrollTop) > 50) {
+                const flash = document.querySelector('.flash-overlay');
+                flash.style.animation = 'none';
+                setTimeout(() => {
+                    flash.style.animation = 'flash 10s ease-in-out infinite';
+                }, 10);
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Floating photo icons effect
+        function createFloatingPhoto() {
+            const photo = document.createElement('div');
+            const icons = ['📸', '🎞️', '🖼️', '🌄'];
+            photo.textContent = icons[Math.floor(Math.random() * icons.length)];
+            photo.style.position = 'fixed';
+            photo.style.bottom = '-30px';
+            photo.style.left = Math.random() * window.innerWidth + 'px';
+            photo.style.fontSize = '1.8rem';
+            photo.style.opacity = '0.15';
+            photo.style.zIndex = '1';
+            photo.style.pointerEvents = 'none';
+            photo.style.transition = 'all 6s ease-out';
+            
+            document.body.appendChild(photo);
+            
+            setTimeout(() => {
+                photo.style.bottom = (window.innerHeight + 50) + 'px';
+                photo.style.opacity = '0';
+                photo.style.transform = `translateX(${(Math.random() - 0.5) * 150}px) rotate(${Math.random() * 360}deg)`;
+            }, 10);
+            
+            setTimeout(() => {
+                photo.remove();
+            }, 6000);
+        }
+
+        // Create floating photos periodically
+        setInterval(createFloatingPhoto, 4000);
+    </script>
+</body>
+</html>

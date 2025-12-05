@@ -425,14 +425,14 @@ class SideInteraction {
         this.leftSide.addEventListener('click', (e) => {
             // Only navigate if not clicking the button
             if (!e.target.closest('.btn-ver-mas')) {
-                this.navigate('matematico.html', 'left');
+                this.navigate('negocios.html', 'left');
             }
         });
         
         this.rightSide.addEventListener('click', (e) => {
             // Only navigate if not clicking the button
             if (!e.target.closest('.btn-ver-mas')) {
-                this.navigate('creativo.html', 'right');
+                this.navigate('viajes.html', 'right');
             }
         });
         
@@ -442,31 +442,121 @@ class SideInteraction {
             button.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent side click
                 const target = button.getAttribute('data-target');
-                const side = target.includes('matematico') ? 'left' : 'right';
+                const side = target.includes('negocios') ? 'left' : 'right';
                 this.navigate(target, side);
             });
         });
     }
     
     navigate(url, side) {
-        const container = document.querySelector('.split-container');
-        const brain = document.querySelector('.brain-center');
+        // Create container for animation
+        const container = document.createElement('div');
+        container.style.position = 'fixed';
+        container.style.top = '0';
+        container.style.left = '0';
+        container.style.width = '100vw';
+        container.style.height = '100vh';
+        container.style.zIndex = '9999';
+        container.style.pointerEvents = 'none';
+        container.style.overflow = 'hidden';
+        document.body.appendChild(container);
         
-        // Elegant exit animation
-        if (side === 'left') {
-            container.style.transform = 'translateX(-100%)';
-            if (brain) brain.style.transform = 'translate(-150%, -50%) scale(0.5)';
-        } else {
-            container.style.transform = 'translateX(100%)';
-            if (brain) brain.style.transform = 'translate(50%, -50%) scale(0.5)';
+        // Determine colors and origin
+        const colors = side === 'left' 
+            ? {
+                primary: '#2d3748',
+                secondary: '#4a5568',
+                accent: '#718096'
+              }
+            : {
+                primary: '#6b46c1',
+                secondary: '#805ad5',
+                accent: '#9f7aea'
+              };
+        
+        const originX = side === 'left' ? '0%' : '100%';
+        const originY = '50%';
+        
+        // Create multiple expanding circles for depth
+        for (let i = 0; i < 4; i++) {
+            const circle = document.createElement('div');
+            circle.style.position = 'absolute';
+            circle.style.left = originX;
+            circle.style.top = originY;
+            circle.style.width = '0';
+            circle.style.height = '0';
+            circle.style.borderRadius = '50%';
+            circle.style.transform = 'translate(-50%, -50%)';
+            circle.style.opacity = '0';
+            
+            // Create gradient background
+            const gradient = `radial-gradient(circle, ${colors.primary}ee, ${colors.secondary}cc, ${colors.accent}aa)`;
+            circle.style.background = gradient;
+            
+            // Different blur levels for depth
+            circle.style.filter = `blur(${20 + i * 10}px)`;
+            
+            container.appendChild(circle);
+            
+            // Animate with staggered delay
+            setTimeout(() => {
+                circle.style.transition = `all ${1.2 + i * 0.1}s cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+                circle.style.opacity = '1';
+                circle.style.width = '300vmax';
+                circle.style.height = '300vmax';
+            }, i * 80);
         }
         
-        container.style.transition = 'transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-        if (brain) brain.style.transition = 'all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        // Add particles overlay
+        const particlesContainer = document.createElement('div');
+        particlesContainer.style.position = 'absolute';
+        particlesContainer.style.top = '0';
+        particlesContainer.style.left = '0';
+        particlesContainer.style.width = '100%';
+        particlesContainer.style.height = '100%';
+        particlesContainer.style.opacity = '0';
+        container.appendChild(particlesContainer);
+        
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.left = originX;
+            particle.style.top = originY;
+            particle.style.width = '10px';
+            particle.style.height = '10px';
+            particle.style.borderRadius = '50%';
+            particle.style.background = colors.accent;
+            particle.style.filter = 'blur(3px)';
+            
+            const angle = (i / 20) * Math.PI * 2;
+            const distance = 40 + Math.random() * 20;
+            
+            particlesContainer.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.style.transition = `all 1s ease-out`;
+                particle.style.transform = `translate(${Math.cos(angle) * distance}vw, ${Math.sin(angle) * distance}vh)`;
+                particle.style.opacity = '0';
+            }, 300 + i * 20);
+        }
         
         setTimeout(() => {
+            particlesContainer.style.transition = 'opacity 0.3s';
+            particlesContainer.style.opacity = '1';
+        }, 200);
+        
+        // Fade out brain
+        const brain = document.querySelector('.brain-center');
+        if (brain) {
+            brain.style.transition = 'all 0.8s ease';
+            brain.style.opacity = '0';
+            brain.style.transform = 'translate(-50%, -50%) scale(0.7)';
+        }
+        
+        // Redirect after animation
+        setTimeout(() => {
             window.location.href = url;
-        }, 1000);
+        }, 1400);
     }
 }
 
@@ -523,8 +613,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ============================================
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
-        window.location.href = 'matematico.html';
+        window.location.href = 'negocios.html';
     } else if (e.key === 'ArrowRight') {
-        window.location.href = 'creativo.html';
+        window.location.href = 'viajes.html';
     }
 });
