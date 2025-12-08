@@ -664,6 +664,131 @@ class NavHoverEffects {
 }
 
 // ============================================
+// DYNAMIC BRAND TEXT - MOUSE INTERACTION
+// ============================================
+class DynamicBrandText {
+    constructor() {
+        this.brandText = document.querySelector('.center-brand-text');
+        if (!this.brandText) return;
+
+        this.variants = [
+            { text: "Rey Vivas", font: "'EB Garamond', serif", letterSpacing: "0.2em", weight: "400", style: "normal" },
+            { text: "レイ・ヴィヴァス", font: "'Noto Serif JP', serif", letterSpacing: "0.15em", weight: "500", style: "normal" }, // Japanese
+            { text: "R V", font: "'Inter', sans-serif", letterSpacing: "0.5em", weight: "900", style: "normal" },
+            { text: "rey_vivas", font: "'Courier New', monospace", letterSpacing: "0.05em", weight: "400", style: "normal" },
+            { text: "REY VIVAS", font: "'Crimson Text', serif", letterSpacing: "0.4em", weight: "400", style: "italic" },
+            { text: "Rey.", font: "'EB Garamond', serif", letterSpacing: "0.1em", weight: "700", style: "italic" },
+            { text: "[ R V ]", font: "'Inter', sans-serif", letterSpacing: "0.2em", weight: "600", style: "normal" },
+            { text: "Rey Vivas", font: "'Times New Roman', serif", letterSpacing: "-0.05em", weight: "400", style: "normal" }, // Classic tight
+            { text: "R.V.", font: "'Inter', sans-serif", letterSpacing: "0.8em", weight: "300", style: "normal" },
+            { text: "REY", font: "'Inter', sans-serif", letterSpacing: "0.3em", weight: "800", style: "normal" },
+            { text: "vivas", font: "'Courier New', monospace", letterSpacing: "0.2em", weight: "400", style: "italic" },
+            { text: "Rey Vivas", font: "'EB Garamond', serif", letterSpacing: "0.5em", weight: "400", style: "normal" }, // Wide
+            { text: "RV.", font: "'Crimson Text', serif", letterSpacing: "0.2em", weight: "600", style: "italic" },
+            { text: "< RV />", font: "'Courier New', monospace", letterSpacing: "0.1em", weight: "600", style: "normal" },
+            { text: "Rey Vivas", font: "'Inter', sans-serif", letterSpacing: "0.1em", weight: "100", style: "normal" }, // Ultra thin
+            // New Variants
+            { text: "яey vivas", font: "'Courier New', monospace", letterSpacing: "0.1em", weight: "500", style: "normal" }, // Pseudo-cyrillic aesthetics
+            { text: "R---V", font: "'Inter', sans-serif", letterSpacing: "0.4em", weight: "700", style: "normal" },
+            { text: "Rey Vivas", font: "'Georgia', serif", letterSpacing: "0.05em", weight: "400", style: "italic" },
+            { text: "REY.", font: "'Helvetica', sans-serif", letterSpacing: "0.25em", weight: "900", style: "normal" },
+            { text: "{ rey }", font: "'Courier New', monospace", letterSpacing: "0.15em", weight: "400", style: "normal" },
+            { text: "Rey Vivas", font: "'Verdana', sans-serif", letterSpacing: "0.6em", weight: "400", style: "normal" }, // Ultra wide sans
+            { text: "rv", font: "'EB Garamond', serif", letterSpacing: "0.2em", weight: "600", style: "italic" }, // Lowercase serif
+            { text: "Rey | Vivas", font: "'Inter', sans-serif", letterSpacing: "0.15em", weight: "300", style: "normal" },
+            { text: "R & V", font: "'Crimson Text', serif", letterSpacing: "0.2em", weight: "400", style: "italic" },
+            { text: "ReyVivas", font: "'Inter', sans-serif", letterSpacing: "-0.08em", weight: "700", style: "normal" } // Tight cluster
+        ];
+
+        this.lastX = 0;
+        this.lastY = 0;
+        this.glitchTimeout = null;
+
+        this.init();
+    }
+
+    init() {
+        let throttleTimer;
+        
+        document.addEventListener('mousemove', (e) => {
+            if (throttleTimer) return;
+            
+            throttleTimer = requestAnimationFrame(() => {
+                this.updateText(e.clientX, e.clientY);
+                throttleTimer = null;
+            });
+        });
+    }
+
+    updateText(mouseX, mouseY) {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        
+        // --- 1. Typography Switching ---
+        const pctX = mouseX / windowWidth;
+        const pctY = mouseY / windowHeight;
+        
+        const len = this.variants.length;
+        // Multiplier 2.5 makes it cycle through the list 2.5x times across the screen
+        const index = Math.floor((pctX + pctY) * len * 2.5) % len;
+
+        const variant = this.variants[index];
+        
+        // Apply styles only if changed
+        if (this.brandText.innerText !== variant.text) {
+            this.brandText.innerText = variant.text;
+            this.brandText.style.fontFamily = variant.font;
+            this.brandText.style.letterSpacing = variant.letterSpacing;
+            this.brandText.style.fontWeight = variant.weight;
+            this.brandText.style.fontStyle = variant.style;
+        }
+
+        // --- 2. Glitch Effect (Velocity Based) ---
+        const deltaX = Math.abs(mouseX - this.lastX);
+        const deltaY = Math.abs(mouseY - this.lastY);
+        const velocity = deltaX + deltaY; 
+
+        // Calculate offset based on speed - INTENSIFIED
+        // Sensitivity: / 2.5 means higher multipliers for lower speeds
+        const offset = Math.min(velocity / 2.5, 30); // Max offset increased to 30px
+        
+        if (offset > 0.5) { // Threshold lowered
+            // Apply Stronger Red/Cyan chromatic aberration
+            // Added vertical jitter (Math.random) for chaotic effect
+            const jitterY = (Math.random() - 0.5) * offset * 0.5;
+            
+            this.brandText.style.textShadow = `
+                ${offset}px ${jitterY}px 0px rgba(255, 0, 60, 0.9), 
+                -${offset}px ${-jitterY}px 0px rgba(0, 255, 230, 0.9),
+                0px 0px ${offset * 0.5}px rgba(255, 255, 255, 0.8)
+            `;
+            
+            // Aggressive skew and random scale
+            const scale = 1 + (Math.random() * 0.1); 
+            
+            if (offset > 4) {
+                 this.brandText.style.transform = `translate(-50%, -50%) skewX(${-offset * 1.5}deg) scale(${scale})`;
+            } else {
+                 this.brandText.style.transform = `translate(-50%, -50%) skewX(${-offset}deg)`;
+            }
+        } else {
+            this.brandText.style.textShadow = 'none';
+            this.brandText.style.transform = `translate(-50%, -50%)`;
+        }
+        
+        this.lastX = mouseX;
+        this.lastY = mouseY;
+        
+        // Reset Shadow when stopping
+        if (this.glitchTimeout) clearTimeout(this.glitchTimeout);
+        this.glitchTimeout = setTimeout(() => {
+            this.brandText.style.textShadow = 'none';
+            this.brandText.style.transform = `translate(-50%, -50%)`;
+        }, 50);
+    }
+}
+
+// ============================================
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -676,6 +801,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new WaveAnimation();
     new PositionBasedExpansion();
     new NavHoverEffects();
+    new DynamicBrandText();
     
     // Ultra elegant fade in
     document.body.style.opacity = '0';

@@ -1008,3 +1008,27 @@ svg {
         flex: 0 !important;
     }
 }
+
+/* ============================================
+   CENTER BRAND TEXT
+   ============================================ */
+.center-brand-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    font-family: 'EB Garamond', serif;
+    font-size: 5rem;
+    letter-spacing: 0.2em;
+    color: white;
+    text-transform: uppercase;
+    pointer-events: none;
+    opacity: 1;
+    white-space: nowrap;
+}
+
+/* Hide brand text when either side is expanded */
+body:has(.split-half.expanded) .center-brand-text {
+    opacity: 0;
+}
