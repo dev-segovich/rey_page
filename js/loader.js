@@ -15,8 +15,8 @@ class ResourceLoader {
         this.totalAssets = this.images.length + this.videos.length;
         this.loadedAssets = 0;
         
-        // Safety timeout in case something hangs (e.g., 8 seconds)
-        this.safetyTimeout = setTimeout(() => this.finish(), 8000);
+        // Safety timeout in case something hangs (e.g., 10 seconds)
+        this.safetyTimeout = setTimeout(() => this.finish(), 10000);
         
         this.init();
     }
