@@ -56,6 +56,68 @@ body::before {
 }
 
 /* ============================================
+   PRELOADER
+   ============================================ */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000; /* Inverted: Black background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 300px;
+}
+
+.loader-brand {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--warm-white); /* Inverted: Light text */
+    text-transform: uppercase;
+}
+
+.loader-bar-container {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2); /* Inverted: Light track */
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--warm-white); /* Inverted: Light bar */
+    transition: width 0.2s ease;
+}
+
+.loader-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6); /* Inverted: Light muted text */
+    letter-spacing: 0.1em;
+}
+
+/* ============================================
    SPLIT CONTAINER
    ============================================ */
 .split-container {
@@ -76,11 +138,14 @@ body::before {
     align-items: center;
     justify-content: center;
     cursor: default;
-    transition: flex 1.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.4s ease;
+    /* Faster closing transition as requested */
+    transition: flex 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
 }
 
 .split-half.expanded {
     flex: 4;
+    /* Slower opening transition for elegance */
+    transition: flex 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
 }
 
 .split-half:not(.expanded) {
@@ -95,15 +160,38 @@ body::before {
     overflow: hidden;
 }
 
-/* Background Video Styling */
+/* Background Video/Carousel Styling - Curtain Effect */
 .bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Curtain width */
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    background: #000;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.bg-video.active-video {
+    opacity: 1;
+    z-index: 1;
+}
+
+.bg-media-item {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;
+    opacity: 0;
+    /* transition removed for instant cut */
+}
+
+.bg-media-item.active {
+    opacity: 1;
 }
 
 /* Gradient Overlay for Text Readability */
@@ -113,17 +201,14 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* background: linear-gradient(
-        135deg, 
-        rgba(250, 249, 246, 0.75) 0%,
-        rgba(232, 227, 216, 0.70) 50%,
-        rgba(212, 168, 154, 0.65) 100%
-    ); */
+    background: linear-gradient(    
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.5)
+        ); 
     z-index: 1;
     pointer-events: none;
 }
 
-/* Elegant overlay */
 /* Elegant overlay */
 .left-half::before {
     content: '';
@@ -138,7 +223,7 @@ body::before {
         rgba(254, 253, 251, 0.3) 100%
     ); */
     opacity: 0;
-    transition: opacity 1.6s ease;
+    transition: opacity 0.8s ease;
     pointer-events: none;
     z-index: 2;
 }
@@ -162,24 +247,34 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        /* linear-gradient(
-            135deg, 
-            rgba(250, 249, 246, 0.75) 0%,
-            rgba(232, 227, 216, 0.70) 50%,
-            rgba(168, 181, 160, 0.65) 100%
-        ), */
-        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center/cover no-repeat;
+    /* Background moved to pseudo-element for fixed "curtain" effect */
     z-index: -1; 
     will-change: clip-path;
     transform: translateZ(0);
     /* Clip path will be applied here via JS */
     transition: opacity 0.5s ease;
+    overflow: hidden;
 }
 
-.right-half.expanded .right-background-layer {
-    opacity: 0;
+.right-background-layer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100%;
+    background: 
+        linear-gradient(    
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.5)
+        ),
+        url('../img/rightSide/bg-rightSide.jpg') center/cover no-repeat;
+    pointer-events: none;
 }
+
+/* .right-half.expanded .right-background-layer removed to keep background visible */
+
+/* .right-half.expanded .carousel-container-vertical removed to keep carousel hidden */
 
 /* .right-half::before removed to prevent unclipped white overlay artifacts on wave */
 /* The visual overlay effects are now handled inside the clipped layers */
@@ -196,15 +291,41 @@ body::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 2; /* Below Carousel (5) but above standard bg */
+    z-index: 2;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    transition: opacity 0.1s ease, visibility 0.1s ease;
 }
 
 .show-dynamic-bg .dynamic-bg-layer {
     opacity: 1;
     visibility: visible;
+}
+
+/* Container for the dynamic background to handle clipping correctly */
+.right-clipped-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Same as dynamic-bg-layer original z-index */
+    pointer-events: none;
+    will-change: clip-path; /* Optimized for animation */
+}
+
+#right-dynamic-bg {
+    width: 100vw;
+    right: 0;
+    left: auto;
+    background-position: center;
+}
+
+#left-dynamic-bg {
+    width: 100vw;
+    left: 0;
+    right: auto;
+    background-position: center;
 }
 
 /* ============================================
@@ -347,7 +468,7 @@ body::before {
     height: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
     z-index: 5;
     will-change: clip-path;
@@ -495,7 +616,7 @@ canvas {
     height: auto;
     margin-bottom: 3rem;
     filter: grayscale(30%) contrast(1.05) saturate(0.85) brightness(1.05);
-    transition: all 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     position: relative;
     border-radius: 2px;
     box-shadow: 
@@ -533,7 +654,7 @@ canvas {
     line-height: 1.1;
     margin: 0;
     position: relative;
-    transition: all 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     font-style: normal;
 }
 
@@ -679,14 +800,14 @@ canvas {
 
 /* Left Brain - Warm tone */
 .left-brain {
-    transition: all 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     transform-origin: center;
 }
 
 .left-brain path {
     fill: #D4A89A;
     opacity: 0.8;
-    transition: all 1.4s ease;
+    transition: all 0.8s ease;
 }
 
 .left-half.expanded ~ .brain-center .left-brain {
@@ -701,14 +822,14 @@ canvas {
 
 /* Right Brain - Cool sage tone */
 .right-brain {
-    transition: all 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
     transform-origin: center;
 }
 
 .right-brain path {
     fill: #A8B5A0;
     opacity: 0.8;
-    transition: all 1.4s ease;
+    transition: all 0.8s ease;
 }
 
 .right-half.expanded ~ .brain-center .right-brain {
@@ -908,7 +1029,7 @@ svg {
 
 /* Make sure text is dark on left if background is light */
 .left-nav .nav-title {
-    color: #2c3e50; /* Dark blue-grey for business side */
+    color: white; /* White text for business side */
 }
 
 /* Navigation Title Styling */
@@ -953,19 +1074,12 @@ svg {
     transition-delay: 0.2s; /* Slight delay for elegance */
 }
 
-/* Remove old hover rule 
-.corner-nav:hover .nav-list { ... } 
-*/
-
 /* List Items Styling */
-.nav-list li {
-    margin-bottom: 8px;
-}
 
 .nav-list li a {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.9rem;
-    color: inherit; /* Inherit from parent */
+    color: white;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -973,6 +1087,8 @@ svg {
     transition: all 0.2s ease;
     display: block;
     font-weight: 500;
+    padding-bottom: 4px;
+    padding-top: 4px;
 }
 
 .nav-list li a:hover {

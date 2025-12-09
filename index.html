@@ -3,74 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain Interface - Descubre tu lado</title>
-    <meta name="description" content="Explora los hemisferios de tu mente: creatividad o lógica matemática">
+    <title>REY VIVAS</title>
+    <meta name="description" content="Landing page">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <h1 class="loader-brand">REY VIVAS</h1>
+            <div class="loader-bar-container">
+                <div class="loader-bar" id="progress-bar"></div>
+            </div>
+            <div class="loader-status" id="loading-status">0%</div>
+        </div>
+    </div>
+
     <!-- Split Container -->
     <div class="split-container">
         <!-- Left Side - Business -->
         <div class="split-half left-half" id="left-side">
-            <!-- Background Video & Overlay -->
-            <video class="bg-video" autoplay muted loop playsinline>
+            <!-- Background Video Stack -->
+            <video id="vid-1" class="bg-video active-video" autoplay muted loop playsinline>
                 <source src="videos/vid1.mp4" type="video/mp4">
+            </video>
+            <video id="vid-2" class="bg-video" autoplay muted loop playsinline>
+                <source src="videos/vid2.mp4" type="video/mp4">
+            </video>
+            <video id="vid-3" class="bg-video" autoplay muted loop playsinline>
+                <source src="videos/vid3.mp4" type="video/mp4">
             </video>
             <div class="bg-overlay"></div>
             
             <!-- Dynamic Background Layer for Hover Effects -->
             <div class="dynamic-bg-layer" id="left-dynamic-bg"></div>
             
-            <!-- Infinite Carousel Background -->
-            <div class="carousel-container">
-                <div class="carousel-track">
-                    <!-- Slide 1 -->
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80" alt="Modern Architecture">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title">MODERN SPACES</h3>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80" alt="Business District">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title">URBAN LIVING</h3>
-                    </div>
-                    <!-- Slide 3 -->
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=80" alt="Luxury Property">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title">LUXURY ESTATES</h3>
-                    </div>
-                    <!-- Slide 4 -->
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80" alt="Contemporary Home">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title">CONTEMPORARY</h3>
-                    </div>
-                    <!-- Slide 5 -->
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80" alt="Premium Office">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title">PRIME LOCATIONS</h3>
-                    </div>
-                    <!-- Duplicate slides for seamless loop -->
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80" alt="Modern Architecture">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title">MODERN SPACES</h3>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80" alt="Business District">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title">URBAN LIVING</h3>
-                    </div>
-                </div>
-            </div>
-            
+
             <!-- Corner Nav Left -->
             <div class="corner-nav left-nav">
                 <h2 class="nav-title">Negocios</h2>
@@ -88,55 +59,11 @@
             <!-- Dedicated Background Layer for Stability -->
             <div class="right-background-layer"></div>
             
-            <!-- Dynamic Background Layer for Hover Effects -->
-            <div class="dynamic-bg-layer" id="right-dynamic-bg"></div>
-            
-            <!-- Vertical Carousel Background -->
-            <div class="carousel-container-vertical">
-                <div class="carousel-track-vertical">
-                    <!-- Slide 1 -->
-                    <div class="carousel-slide-vertical">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Mountain Landscape">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title-vertical">MOUNTAIN ESCAPE</h3>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="carousel-slide-vertical">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" alt="Beach Paradise">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title-vertical">TROPICAL PARADISE</h3>
-                    </div>
-                    <!-- Slide 3 -->
-                    <div class="carousel-slide-vertical">
-                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=80" alt="Lake View">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title-vertical">SERENE WATERS</h3>
-                    </div>
-                    <!-- Slide 4 -->
-                    <div class="carousel-slide-vertical">
-                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&q=80" alt="Road Trip">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title-vertical">OPEN ROADS</h3>
-                    </div>
-                    <!-- Slide 5 -->
-                    <div class="carousel-slide-vertical">
-                        <img src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?w=1200&q=80" alt="Forest">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title-vertical">WILD NATURE</h3>
-                    </div>
-                    <!-- Duplicate slides for seamless loop -->
-                    <div class="carousel-slide-vertical">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Mountain Landscape">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title-vertical">MOUNTAIN ESCAPE</h3>
-                    </div>
-                    <div class="carousel-slide-vertical">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" alt="Beach Paradise">
-                        <div class="carousel-overlay"></div>
-                        <h3 class="carousel-title-vertical">TROPICAL PARADISE</h3>
-                    </div>
-                </div>
+            <!-- Dynamic Background Layer for Hover Effects -> Wrapped for Clip Path -->
+            <div class="right-clipped-container">
+                <div class="dynamic-bg-layer" id="right-dynamic-bg"></div>
             </div>
+
             
             <!-- Main Title (centered over carousel) -->
             <!-- Corner Nav Right -->
@@ -146,6 +73,7 @@
                     <li><a href="viajes.html" id="travel-link-1">Example 1</a></li>
                     <li><a href="#" id="travel-link-2">Example 2</a></li>
                     <li><a href="#" id="travel-link-3">Example 3</a></li>
+                    <li><a href="#" id="travel-link-4">Example 4</a></li>
                 </ul>
             </div>
         </div>
@@ -160,6 +88,8 @@
 
     <div class="center-brand-text">REY VIVAS</div>
 
-    <script src="/js/script.js"></script>
+
+    <script src="js/loader.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

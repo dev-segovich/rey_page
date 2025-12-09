@@ -357,12 +357,12 @@ class WaveAnimation {
         // Juega con estos valores para ajustar el efecto
         // ==========================================
         this.baseAmplitude = 2;     // Reposo: Onda visible siempre (antes 10)
-        this.maxAmplitude = 10;      // Rápido: Picos estilo EKG
+        this.maxAmplitude = 20;      // Rápido: Picos estilo EKG
         
         this.baseFrequency = 0.002;   // Reposo: Curvas suaves pero CLARAMENTE VISIBLES (antes 0.001 era recta)
         this.maxFrequency = 0.001;    // Rápido: Picos intermedios
         
-        this.segments = 550;         // Resolución balanceada para rendimiento y suavidad
+        this.segments = 400;         // Resolución balanceada para rendimiento y suavidad
         // ==========================================
         
         this.currentAmplitude = this.baseAmplitude;
@@ -493,7 +493,7 @@ class WaveAnimation {
         // Apply clip-path to STABLE LAYERS
         // 1. The static background layer
         // 2. The carousel container (which appears on expansion)
-        const targets = document.querySelectorAll('.right-background-layer, .carousel-container-vertical');
+        const targets = document.querySelectorAll('.right-background-layer, .carousel-container-vertical, .right-clipped-container');
         
         targets.forEach(el => {
             el.style.clipPath = polygon;
@@ -598,9 +598,6 @@ class PositionBasedExpansion {
 }
 
 // ============================================
-// ATEX LINK HOVER - SHOW VIDEO BACKGROUND
-// ============================================
-// ============================================
 // NAV HOVER EFFECTS - SHOW DYNAMIC BACKGROUNDS
 // ============================================
 class NavHoverEffects {
@@ -615,28 +612,31 @@ class NavHoverEffects {
 
     init() {
         // --- Left Side Links ---
-        // 1. Atex Group -> Video Background (already in HTML)
-        this.setupLinkHover('atex-link', 'left', 'video');
+        // 1. Atex Group -> Video Background
+        this.setupLinkHover('atex-link', 'left', 'video', 'vid-1');
         
         // 2. Example 2 -> Image Background
-        this.setupLinkHover('biz-link-2', 'left', 'image', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80');
+        this.setupLinkHover('biz-link-2', 'left', 'video', 'vid-2');
         
         // 3. Example 3 -> Image Background
-        this.setupLinkHover('biz-link-3', 'left', 'image', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1600&q=80');
+        this.setupLinkHover('biz-link-3', 'left', 'video', 'vid-3');
 
 
         // --- Right Side Links ---
         // 1. Example 1 -> Image Background
-        this.setupLinkHover('travel-link-1', 'right', 'image', 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80');
+        this.setupLinkHover('travel-link-1', 'right', 'image', 'img/rightSide/example1.jpg');
         
         // 2. Example 2 -> Image Background
-        this.setupLinkHover('travel-link-2', 'right', 'image', 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1600&q=80');
+        this.setupLinkHover('travel-link-2', 'right', 'image', 'img/rightSide/example2.jpg');
         
         // 3. Example 3 -> Image Background
-        this.setupLinkHover('travel-link-3', 'right', 'image', 'https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?w=1600&q=80');
+        this.setupLinkHover('travel-link-3', 'right', 'image', 'img/rightSide/example3.jpg');
+
+        // 4. Example 4 -> Image Background
+        this.setupLinkHover('travel-link-4', 'right', 'image', 'img/rightSide/bg-rightSide.jpg');
     }
 
-    setupLinkHover(linkId, side, type, imageUrl = '') {
+    setupLinkHover(linkId, side, type, assetIdOrUrl = '') {
         const link = document.getElementById(linkId);
         if (!link) return;
 
@@ -644,20 +644,34 @@ class NavHoverEffects {
         const targetBgLayer = side === 'left' ? this.leftBgLayer : this.rightBgLayer;
 
         link.addEventListener('mouseenter', () => {
+             // Logic: "Sticky" background. The last hovered link sets the background state.
+            // We do not revert on mouseleave.
+            
             if (type === 'video') {
-                targetSide.classList.add('show-video-background');
-            } else if (type === 'image') {
-                targetBgLayer.style.backgroundImage = `url('${imageUrl}')`;
-                targetSide.classList.add('show-dynamic-bg');
-            }
-        });
-
-        link.addEventListener('mouseleave', () => {
-            if (type === 'video') {
-                targetSide.classList.remove('show-video-background');
-            } else if (type === 'image') {
                 targetSide.classList.remove('show-dynamic-bg');
-                // Optional: clear background after delay or leave it for smoother transitions
+                targetSide.classList.add('show-video-background');
+                
+                // Logic: Switch active video class
+                // 1. Deactivate all videos
+                const allVideos = targetSide.querySelectorAll('.bg-video');
+                allVideos.forEach(v => v.classList.remove('active-video'));
+                
+                // 2. Activate specific video by ID
+                const activeVideo = document.getElementById(assetIdOrUrl);
+                if (activeVideo) {
+                    activeVideo.classList.add('active-video');
+                    // Ensure it is playing (should be autoplaying but just in case)
+                    // activeVideo.play(); 
+                    // User requested "resume where left off", so we just show it. 
+                    // Autoplay attribute handles the running state.
+                }
+                
+            } else if (type === 'image') {
+                // If image, set the image and show the dynamic layer
+                targetSide.classList.remove('show-video-background'); // This implicitly "hides" the active video container from view context, but keeping opacity logic separate if needed
+                
+                targetBgLayer.style.backgroundImage = `url('${assetIdOrUrl}')`;
+                targetSide.classList.add('show-dynamic-bg');
             }
         });
     }
@@ -685,9 +699,8 @@ class DynamicBrandText {
             { text: "vivas", font: "'Courier New', monospace", letterSpacing: "0.2em", weight: "400", style: "italic" },
             { text: "Rey Vivas", font: "'EB Garamond', serif", letterSpacing: "0.5em", weight: "400", style: "normal" }, // Wide
             { text: "RV.", font: "'Crimson Text', serif", letterSpacing: "0.2em", weight: "600", style: "italic" },
-            { text: "< RV />", font: "'Courier New', monospace", letterSpacing: "0.1em", weight: "600", style: "normal" },
+            { text: "<RV/>", font: "'Courier New', monospace", letterSpacing: "0.1em", weight: "600", style: "normal" },
             { text: "Rey Vivas", font: "'Inter', sans-serif", letterSpacing: "0.1em", weight: "100", style: "normal" }, // Ultra thin
-            // New Variants
             { text: "яey vivas", font: "'Courier New', monospace", letterSpacing: "0.1em", weight: "500", style: "normal" }, // Pseudo-cyrillic aesthetics
             { text: "R---V", font: "'Inter', sans-serif", letterSpacing: "0.4em", weight: "700", style: "normal" },
             { text: "Rey Vivas", font: "'Georgia', serif", letterSpacing: "0.05em", weight: "400", style: "italic" },
