@@ -1179,3 +1179,50 @@ body:has(.split-half.expanded) .center-brand-text {
 body:has(.split-half.expanded) .center-brain-svg {
     opacity: 0;
 }
+
+/* ============================================
+   FOOTER LINKS
+   ============================================ */
+.footer-links {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001;
+    pointer-events: none;
+}
+
+.footer-link {
+    position: absolute;
+    bottom: 2rem;
+    pointer-events: auto;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-link h2 {
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    letter-spacing: 0px;
+    margin: 0;
+    cursor: pointer;
+    /* text-transform: uppercase; */
+    transition: color 0.3s ease;
+    color: white;
+}
+
+.footer-link-left {
+    left: 2rem;
+}
+
+.footer-link-right {
+    right: 2rem;
+}
+
+.footer-link-left:hover {
+    transform: translateY(-5px);
+}
+
+.footer-link-right:hover {
+    transform: translateY(-5px);
+}
