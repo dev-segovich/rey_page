@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "business": "Negocios",
+    "photos": "Fotos",
+    "atexGroup": "Atex Group",
+    "example2": "Ejemplo 2",
+    "example3": "Ejemplo 3",
+    "example4": "Ejemplo 4",
+    "more": "Más"
+  },
+  "footer": {
+    "aboutMe": "Sobre mí",
+    "links": "Enlaces"
+  }
+}
