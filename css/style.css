@@ -1226,3 +1226,43 @@ body:has(.split-half.expanded) .center-brain-svg {
 .footer-link-right:hover {
     transform: translateY(-5px);
 }
+
+/* ============================================
+   LANGUAGE SWITCHER
+   ============================================ */
+.lang-switcher {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.3s ease;
+    letter-spacing: 0.05em;
+}
+
+.lang-btn.active {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+}
+
+.lang-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.lang-separator {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+}
