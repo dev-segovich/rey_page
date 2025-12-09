@@ -15,8 +15,7 @@ class ResourceLoader {
         this.totalAssets = this.images.length + this.videos.length;
         this.loadedAssets = 0;
         
-        // Safety timeout in case something hangs (e.g., 10 seconds)
-        this.safetyTimeout = setTimeout(() => this.finish(), 10000);
+        // Removed safety timeout as requested - strict 100% check enabled
         
         this.init();
     }
@@ -68,7 +67,8 @@ class ResourceLoader {
     }
     
     finish() {
-        clearTimeout(this.safetyTimeout);
+        // Strict 100% only
+
         
         if (this.progressBar) this.progressBar.style.width = '100%';
         if (this.statusText) this.statusText.innerText = '100%';
