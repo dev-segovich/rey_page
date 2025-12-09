@@ -363,6 +363,15 @@ class WaveAnimation {
         this.maxFrequency = 0.001;    // Rápido: Picos intermedios
         
         this.segments = 400;         // Resolución balanceada para rendimiento y suavidad
+        
+        // ==========================================
+        // CONFIGURACIÓN DEL CEREBRO SVG / BRAIN SVG SETTINGS
+        // Ajusta estos valores para el efecto del cerebro
+        // ==========================================
+        this.brainStrokeMin = 0.5;    // Grosor mínimo del trazo en reposo
+        this.brainStrokeMax = 3;      // Grosor máximo del trazo con movimiento rápido
+        this.brainOpacityMin = 0.8;   // Opacidad mínima en reposo
+        this.brainOpacityMax = 1;     // Opacidad máxima con movimiento rápido
         // ==========================================
         
         this.currentAmplitude = this.baseAmplitude;
@@ -520,6 +529,97 @@ class WaveAnimation {
         
         this.wavePath.setAttribute('stroke-width', strokeWidth);
         this.wavePath.setAttribute('stroke', 'rgba(0, 0, 0, 0)'); // Transparent
+        
+        // ============================================
+        // APPLY WAVE EFFECT TO BRAIN SVG PATHS
+        // ============================================
+        const brainPaths = document.querySelectorAll('.brain-paths path');
+        const brainContainer = document.querySelector('.center-brain-svg');
+        
+        if (brainPaths.length > 0) {
+            // Calculate dynamic stroke width based on velocity
+            const strokeWidth = this.brainStrokeMin + (velocityFactor * (this.brainStrokeMax - this.brainStrokeMin));
+            
+            // Calculate dynamic opacity based on velocity
+            const strokeOpacity = this.brainOpacityMin + (velocityFactor * (this.brainOpacityMax - this.brainOpacityMin));
+            const strokeColor = `rgba(255, 255, 255, ${strokeOpacity})`; // Blanco
+
+            
+            brainPaths.forEach(path => {
+                // Apply dynamic stroke width and color
+                path.style.strokeWidth = strokeWidth;
+                path.style.stroke = strokeColor;
+                
+                // Add dash animation for wave effect
+                const pathLength = path.getTotalLength();
+                const dashLength = 20 + (this.currentAmplitude * 2);
+                const dashGap = 10 + (this.currentAmplitude);
+                
+                path.style.strokeDasharray = `${dashLength},${dashGap}`;
+                path.style.strokeDashoffset = (this.time * 2) % (dashLength + dashGap);
+            });
+        }
+        
+        // ============================================
+        // APPLY GLITCH EFFECT TO BRAIN SVG
+        // Based on mouse velocity
+        // ============================================
+        if (brainContainer) {
+            // Calculate glitch intensity (0 to 1) based on velocity
+            const glitchIntensity = Math.min(safeVelocity / 20, 1);
+            
+            if (glitchIntensity > 0.1) {
+                // Random offset for glitch position
+                const offsetX = (Math.random() - 0.5) * glitchIntensity * 15;
+                const offsetY = (Math.random() - 0.5) * glitchIntensity * 15;
+                
+                // Random scale distortion
+                const scaleDistort = 1 + (Math.random() - 0.5) * glitchIntensity * 0.1;
+                
+                // Random skew
+                const skewX = (Math.random() - 0.5) * glitchIntensity * 10;
+                const skewY = (Math.random() - 0.5) * glitchIntensity * 5;
+                
+                // Apply transform
+                brainContainer.style.transform = `
+                    translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))
+                    scale(${scaleDistort})
+                    skewX(${skewX}deg)
+                    skewY(${skewY}deg)
+                `;
+                
+                // Apply filter effects
+                const blur = glitchIntensity * 2;
+                const hueRotate = (Math.random() * glitchIntensity * 360);
+                const brightness = 1 + (Math.random() - 0.5) * glitchIntensity * 0.3;
+                const contrast = 1 + (glitchIntensity * 0.5);
+                
+                brainContainer.style.filter = `
+                    blur(${blur}px)
+                    hue-rotate(${hueRotate}deg)
+                    brightness(${brightness})
+                    contrast(${contrast})
+                    drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1))
+                `;
+                
+                // Chromatic aberration effect using box-shadow on SVG
+                const chromaticIntensity = glitchIntensity * 8;
+                const redOffset = `${chromaticIntensity}px 0 0 rgba(255, 0, 0, ${glitchIntensity * 0.8})`;
+                const cyanOffset = `${-chromaticIntensity}px 0 0 rgba(0, 255, 255, ${glitchIntensity * 0.8})`;
+                
+                brainContainer.style.filter = `
+                    blur(${blur}px)
+                    drop-shadow(${redOffset})
+                    drop-shadow(${cyanOffset})
+                    drop-shadow(0 0 ${glitchIntensity * 20}px rgba(255, 255, 255, ${glitchIntensity * 0.6}))
+                `;
+                
+            } else {
+                // Reset to normal when velocity is low
+                brainContainer.style.transform = 'translate(-50%, -50%)';
+                brainContainer.style.filter = 'drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1))';
+            }
+        }
         
         requestAnimationFrame(() => this.animate());
     }
