@@ -806,7 +806,7 @@ class DynamicBrandText {
             { text: "Rey Vivas", font: "'Georgia', serif", letterSpacing: "0.05em", weight: "400", style: "italic" },
             { text: "REY.", font: "'Helvetica', sans-serif", letterSpacing: "0.25em", weight: "900", style: "normal" },
             { text: "{ rey }", font: "'Courier New', monospace", letterSpacing: "0.15em", weight: "400", style: "normal" },
-            { text: "Rey Vivas", font: "'Verdana', sans-serif", letterSpacing: "0.6em", weight: "400", style: "normal" }, // Ultra wide sans
+            { text: "Rey Vivas", font: "'Verdana', sans-serif", letterSpacing: "0.4em", weight: "400", style: "normal" }, // Ultra wide sans
             { text: "rv", font: "'EB Garamond', serif", letterSpacing: "0.2em", weight: "600", style: "italic" }, // Lowercase serif
             { text: "Rey | Vivas", font: "'Inter', sans-serif", letterSpacing: "0.15em", weight: "300", style: "normal" },
             { text: "R & V", font: "'Crimson Text', serif", letterSpacing: "0.2em", weight: "400", style: "italic" },

@@ -1266,3 +1266,75 @@ body:has(.split-half.expanded) .center-brain-svg {
     color: rgba(255, 255, 255, 0.3);
     font-size: 0.9rem;
 }
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    /* Keep split layout horizontal (side by side) on mobile */
+    .split-container {
+        flex-direction: row; /* Force horizontal layout */
+        height: 100vh;
+    }
+    
+    .split-half {
+        flex: 1; /* Each side takes 50% */
+        min-width: 50%;
+    }
+    
+    .split-half.expanded {
+        flex: 3; /* Expanded side takes more space but not full width */
+    }
+    
+    /* Smaller REY VIVAS text for mobile */
+    .center-brand-text {
+        font-size: 2.5rem; /* Reduced from 5rem */
+        letter-spacing: 0.15em;
+    }
+    
+    /* Smaller brain SVG for mobile */
+    #brain-svg {
+        width: clamp(300px, 40vw, 600px); /* Reduced from 600-800px */
+    }
+    
+    /* Adjust navigation for mobile */
+    .corner-nav {
+        padding: 1rem;
+    }
+    
+    .nav-title {
+        font-size: 1rem; /* Smaller title */
+    }
+    
+    .nav-list li a {
+        font-size: 0.8rem; /* Smaller links */
+    }
+    
+    /* Adjust footer for mobile */
+    .footer-link h2 {
+        font-size: 0.8rem;
+    }
+    
+    .footer-link-left,
+    .footer-link-right {
+        bottom: 1rem;
+    }
+    
+    .footer-link-left {
+        left: 1rem;
+    }
+    
+    .footer-link-right {
+        right: 1rem;
+    }
+    
+    .lang-switcher {
+        bottom: 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .lang-btn {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+    }
+}
