@@ -766,6 +766,9 @@ class NavHoverEffects {
 		// 3. Example 3 -> Image Background
 		this.setupLinkHover("biz-link-3", "left", "video", "vid-3");
 
+		// 4. More -> Video Background
+		this.setupLinkHover("biz-link-4", "left", "video", "vid-4");
+
 		// --- Right Side Links ---
 		// 1. Example 1 -> Image Background
 		this.setupLinkHover(

@@ -1,15 +1,13 @@
 {
-  "nav": {
-    "business": "Business",
-    "photos": "Photos",
-    "atexGroup": "Atex Group",
-    "example2": "Example 2",
-    "example3": "Example 3",
-    "example4": "Example 4",
-    "more": "More"
-  },
-  "footer": {
-    "aboutMe": "About me",
-    "links": "Links"
-  }
+	"nav": {
+		"business": "Business",
+		"photos": "Photos",
+		"b1": "Building Spaces",
+		"p1": "Creating Spaces",
+		"more": "More"
+	},
+	"footer": {
+		"aboutMe": "About me",
+		"links": "Links"
+	}
 }
