@@ -801,11 +801,9 @@ class NavHoverEffects {
 
 	init() {
 		// --- Left Side Links ---
-		// 1. Atex Group -> Video Background
 		this.setupLinkHover("biz-link-1", "left", "video", "vid-1");
-
-		// 2. Example 2 -> Image Background
 		this.setupLinkHover("biz-link-2", "left", "video", "vid-2");
+		this.setupLinkHover("biz-link-3", "left", "video", "vid-3");
 
 		// --- Right Side Links ---
 		// 1. Example 1 -> Image Background

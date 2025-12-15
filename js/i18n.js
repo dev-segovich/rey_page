@@ -108,20 +108,28 @@ class I18n {
             </div>
         `;
         
-        // Insert switcher in the center of footer
-        const footerLinks = document.querySelector('.footer-links');
-        if (footerLinks) {
-            footerLinks.insertAdjacentHTML('beforeend', switcherHtml);
-            
-            // Add event listeners
-            const langButtons = document.querySelectorAll('.lang-btn');
-            langButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const lang = e.target.getAttribute('data-lang');
-                    this.setLanguage(lang);
-                });
+        // 1. Try specific containers (e.g. in nav)
+        const containers = document.querySelectorAll('.lang-switcher-container');
+        if (containers.length > 0) {
+            containers.forEach(container => {
+                container.innerHTML = switcherHtml;
             });
+        } else {
+            // 2. Fallback to footer-links (for index.html)
+            const footerLinks = document.querySelector('.footer-links');
+            if (footerLinks && !footerLinks.querySelector('.lang-switcher')) {
+                footerLinks.insertAdjacentHTML('beforeend', switcherHtml);
+            }
         }
+            
+        // Add event listeners
+        const langButtons = document.querySelectorAll('.lang-btn');
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = e.target.getAttribute('data-lang');
+                this.setLanguage(lang);
+            });
+        });
     }
     
     updateSwitcherState() {

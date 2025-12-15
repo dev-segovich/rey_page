@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Investment Thesis - REY VIVAS</title>
+		<meta name="description" content="My Investment Philosophy and Thesis" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			body {
+				overflow-y: auto;
+				background: var(--warm-white);
+			}
+
+			.thesis-container {
+				max-width: 1000px;
+				margin: 0 auto;
+				padding: 8rem 2rem 4rem;
+				position: relative;
+				z-index: 10;
+			}
+
+			.thesis-header {
+				text-align: center;
+				margin-bottom: 6rem;
+			}
+
+			.thesis-header h1 {
+				font-family: "EB Garamond", "Crimson Text", Georgia, serif;
+				font-size: clamp(2.5rem, 5vw, 4.5rem);
+				font-weight: 400;
+				letter-spacing: -0.01em;
+				color: var(--deep-brown);
+				margin-bottom: 1.5rem;
+				line-height: 1.1;
+			}
+
+			.thesis-header p {
+				font-family: "Inter", sans-serif;
+				font-size: clamp(1rem, 2vw, 1.2rem);
+				color: var(--text-secondary);
+				font-weight: 300;
+				letter-spacing: 0.05em;
+				max-width: 700px;
+				margin: 0 auto;
+			}
+
+			.thesis-section {
+				margin-bottom: 5rem;
+			}
+
+			.thesis-section h2 {
+				font-family: "EB Garamond", Georgia, serif;
+				font-size: clamp(2rem, 4vw, 3rem);
+				font-weight: 400;
+				color: var(--deep-brown);
+				border-bottom: 1px solid var(--sand);
+				padding-bottom: 1rem;
+				margin-bottom: 2rem;
+				letter-spacing: -0.01em;
+			}
+
+			.thesis-section h3 {
+				font-family: "Inter", sans-serif;
+				font-size: 1.3rem;
+				font-weight: 500;
+				color: var(--terracotta);
+				margin-bottom: 1rem;
+				margin-top: 2.5rem;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+			}
+
+			.thesis-section p {
+				font-family: "Inter", sans-serif;
+				font-size: 1.05rem;
+				line-height: 1.8;
+				color: var(--text-secondary);
+				margin-bottom: 1.5rem;
+				font-weight: 300;
+				text-align: justify;
+			}
+
+			.thesis-nav {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				padding: 2rem 4rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background: rgba(250, 249, 246, 0.95);
+				backdrop-filter: blur(10px);
+				z-index: 1000;
+				border-bottom: 1px solid var(--sand);
+			}
+
+			.thesis-nav a {
+				font-family: "Inter", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 500;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+				color: var(--text-primary);
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+
+			.thesis-nav a:hover {
+				color: var(--terracotta);
+			}
+
+			.nav-brand {
+				font-family: "Inter", sans-serif;
+				font-size: 1.2rem;
+				font-weight: 600;
+				letter-spacing: 0.2em;
+				color: var(--deep-brown);
+			}
+
+            /* Language Switcher in Nav */
+            .thesis-nav .lang-switcher {
+                position: static;
+                transform: none;
+                display: flex;
+                gap: 0.5rem;
+            }
+            
+            .thesis-nav .lang-btn {
+                color: var(--text-primary);
+                font-size: 0.85rem;
+                padding: 0.2rem 0.4rem;
+            }
+            
+            .thesis-nav .lang-btn.active {
+                color: var(--terracotta);
+                font-weight: 700;
+            }
+            
+            .thesis-nav .lang-separator {
+                color: var(--text-secondary);
+            }
+
+			.thesis-table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 2rem 0;
+				background: var(--cream);
+				border-radius: 4px;
+				overflow: hidden;
+				box-shadow: 0 4px 12px rgba(26, 23, 20, 0.03);
+			}
+
+			.thesis-table th,
+			.thesis-table td {
+				padding: 1.2rem;
+				text-align: left;
+				border-bottom: 1px solid var(--sand);
+				font-family: "Inter", sans-serif;
+			}
+
+			.thesis-table th {
+				font-weight: 600;
+				color: var(--deep-brown);
+				text-transform: uppercase;
+				font-size: 0.8rem;
+				letter-spacing: 0.1em;
+				background: rgba(232, 227, 216, 0.3);
+			}
+
+			.thesis-table td {
+				color: var(--text-secondary);
+				font-size: 0.95rem;
+				line-height: 1.6;
+			}
+
+			.thesis-table tr:last-child td {
+				border-bottom: none;
+			}
+
+            /* Footer Styles */
+            .thesis-footer {
+                background: var(--deep-brown);
+                color: var(--cream);
+                padding: 4rem 2rem;
+                margin-top: 4rem;
+                position: relative;
+                z-index: 10;
+            }
+            
+            .footer-content {
+                max-width: 1000px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+            
+            .footer-brand {
+                font-family: "Inter", sans-serif;
+                font-size: 1.5rem;
+                font-weight: 600;
+                letter-spacing: 0.2em;
+            }
+            
+            .footer-links-row {
+                display: flex;
+                gap: 2rem;
+            }
+            
+            .footer-links-row a {
+                color: var(--cream);
+                text-decoration: none;
+                font-family: "Inter", sans-serif;
+                font-size: 1rem;
+                transition: color 0.3s ease;
+            }
+            
+            .footer-links-row a:hover {
+                color: var(--terracotta);
+            }
+            
+            .footer-copyright {
+                font-family: "Inter", sans-serif;
+                font-size: 0.8rem;
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+			@media (max-width: 768px) {
+				.thesis-nav {
+					padding: 1.5rem 2rem;
+				}
+				.thesis-container {
+					padding: 6rem 1.5rem 3rem;
+				}
+				.thesis-table {
+					display: block;
+					overflow-x: auto;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Navigation -->
+		<nav class="thesis-nav">
+			<a href="index.html" class="nav-brand">REY VIVAS</a>
+			<div class="lang-switcher-container"></div>
+			<a href="index.html" data-i18n="thesis.nav_back"></a>
+		</nav>
+
+		<div class="thesis-container">
+			<!-- Introduction -->
+			<div class="thesis-header">
+				<h1 data-i18n="thesis.title"></h1>
+				<p data-i18n="thesis.subtitle"></p>
+			</div>
+
+			<section class="thesis-section">
+				<p data-i18n="thesis.intro.p1"></p>
+				<p data-i18n="thesis.intro.p2"></p>
+			</section>
+
+			<!-- Thesis 1 -->
+			<section class="thesis-section">
+				<h2 data-i18n="thesis.section1.title"></h2>
+				<p><strong data-i18n="thesis.section1.subtitle"></strong></p>
+				<p data-i18n="thesis.section1.desc"></p>
+
+				<h3 data-i18n="thesis.section1.opportunity"></h3>
+				<p>
+					<strong data-i18n="thesis.section1.p1_title"></strong> <span data-i18n="thesis.section1.p1_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section1.p2_title"></strong> <span data-i18n="thesis.section1.p2_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section1.p3_title"></strong> <span data-i18n="thesis.section1.p3_text"></span>
+				</p>
+			</section>
+
+			<!-- Thesis 2 -->
+			<section class="thesis-section">
+				<h2 data-i18n="thesis.section2.title"></h2>
+				<p><strong data-i18n="thesis.section2.subtitle"></strong></p>
+				<p data-i18n="thesis.section2.desc"></p>
+
+				<h3 data-i18n="thesis.section2.gateway"></h3>
+				<p>
+					<strong data-i18n="thesis.section2.p1_title"></strong> <span data-i18n="thesis.section2.p1_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section2.p2_title"></strong> <span data-i18n="thesis.section2.p2_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section2.p3_title"></strong> <span data-i18n="thesis.section2.p3_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section2.p4_title"></strong> <span data-i18n="thesis.section2.p4_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section2.p5_title"></strong> <span data-i18n="thesis.section2.p5_text"></span>
+				</p>
+
+				<h3 data-i18n="thesis.section2.strategy"></h3>
+				<p>
+					<strong data-i18n="thesis.section2.s1_title"></strong> <span data-i18n="thesis.section2.s1_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section2.s2_title"></strong> <span data-i18n="thesis.section2.s2_text"></span>
+				</p>
+			</section>
+
+			<!-- Thesis 3 -->
+			<section class="thesis-section">
+				<h2 data-i18n="thesis.section3.title"></h2>
+				<p><strong data-i18n="thesis.section3.subtitle"></strong></p>
+				<p data-i18n="thesis.section3.desc"></p>
+
+				<h3 data-i18n="thesis.section3.market_rate"></h3>
+				<p>
+					<strong data-i18n="thesis.section3.p1_title"></strong> <span data-i18n="thesis.section3.p1_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section3.p2_title"></strong> <span data-i18n="thesis.section3.p2_text"></span>
+				</p>
+
+				<h3 data-i18n="thesis.section3.rv_parks"></h3>
+				<p>
+					<strong data-i18n="thesis.section3.rv1_title"></strong> <span data-i18n="thesis.section3.rv1_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.section3.rv2_title"></strong> <span data-i18n="thesis.section3.rv2_text"></span>
+				</p>
+			</section>
+
+			<!-- Art Integration -->
+			<section class="thesis-section">
+				<h2 data-i18n="thesis.art.title"></h2>
+				<p>
+					<strong data-i18n="thesis.art.subtitle"></strong>
+				</p>
+
+				<h3 data-i18n="thesis.art.dev_title"></h3>
+				<p data-i18n="thesis.art.dev_text"></p>
+
+				<h3 data-i18n="thesis.art.roi_title"></h3>
+				<p>
+					<strong data-i18n="thesis.art.opp_title"></strong>
+				</p>
+				<p data-i18n="thesis.art.opp_text1"></p>
+				<p data-i18n="thesis.art.opp_text2"></p>
+
+				<h3 data-i18n="thesis.art.synergy_title"></h3>
+				<p data-i18n="thesis.art.synergy_text"></p>
+
+				<h3 data-i18n="thesis.art.advantage_title"></h3>
+				<p data-i18n="thesis.art.advantage_text"></p>
+
+				<h3 data-i18n="thesis.art.stage1_title"></h3>
+				<p data-i18n="thesis.art.stage1_text"></p>
+
+				<h3 data-i18n="thesis.art.stage2_title"></h3>
+				<p data-i18n="thesis.art.stage2_text"></p>
+
+				<table class="thesis-table">
+					<thead>
+						<tr>
+							<th data-i18n="thesis.art.table2.h1"></th>
+							<th data-i18n="thesis.art.table2.h2"></th>
+							<th data-i18n="thesis.art.table2.h3"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong data-i18n="thesis.art.table2.r1c1"></strong></td>
+							<td data-i18n="thesis.art.table2.r1c2"></td>
+							<td>
+								<span data-i18n="thesis.art.table2.r1c3_1"></span><br />
+								<span data-i18n="thesis.art.table2.r1c3_2"></span>
+							</td>
+						</tr>
+						<tr>
+							<td><strong data-i18n="thesis.art.table2.r2c1"></strong></td>
+							<td data-i18n="thesis.art.table2.r2c2"></td>
+							<td>
+								<span data-i18n="thesis.art.table2.r2c3_1"></span><br />
+								<span data-i18n="thesis.art.table2.r2c3_2"></span><br />
+								<span data-i18n="thesis.art.table2.r2c3_3"></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3 data-i18n="thesis.art.services_title"></h3>
+				<p data-i18n="thesis.art.services_intro"></p>
+				<p>
+					<strong data-i18n="thesis.art.s1_title"></strong> <span data-i18n="thesis.art.s1_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.art.s2_title"></strong> <span data-i18n="thesis.art.s2_text"></span>
+				</p>
+				<p>
+					<strong data-i18n="thesis.art.s3_title"></strong> <span data-i18n="thesis.art.s3_text"></span>
+				</p>
+			</section>
+		</div>
+
+		<!-- Footer -->
+		<footer class="thesis-footer">
+			<div class="footer-content">
+				<div class="footer-brand">REY VIVAS</div>
+				<div class="footer-links-row">
+					<a href="https://www.linkedin.com/in/reynaldovivas/" target="_blank" data-i18n="footer.aboutMe"></a>
+					<a href="https://reylinks.atexgrp.com" target="_blank" data-i18n="footer.links"></a>
+				</div>
+				<div class="footer-copyright" data-i18n="footer.copyright"></div>
+			</div>
+		</footer>
+
+		<script src="js/i18n.js"></script>
+	</body>
+</html>
