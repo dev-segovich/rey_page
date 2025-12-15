@@ -1,0 +1,22 @@
+{
+	"nav": {
+		"business": "Construyendo espacios",
+		"photos": "Creando espacios",
+		"b1": "Casa a Medida Destacada",
+		"b2": "Remodelación Destacada",
+		"b3": "Casa de Promoción Destacada",
+		"b4": "Tesis de Inversión",
+		"b5": "Más",
+
+		"p1": "Colección de Paisajes",
+		"p2": "Colección de Vida Silvestre",
+		"p3": "Colección Urbana",
+		"p4": "Conectando artistas con desarrolladores",
+		"p5": "Tienda",
+		"more": "Más"
+	},
+	"footer": {
+		"aboutMe": "Sobre mí",
+		"links": "Enlaces"
+	}
+}

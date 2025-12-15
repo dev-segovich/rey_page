@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Blog - REY VIVAS</title>
+		<meta name="description" content="Blog personal y publicaciones" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			/* Blog Specific Styles */
+			body {
+				overflow-y: auto;
+			}
+
+			.blog-container {
+				max-width: 1400px;
+				margin: 0 auto;
+				padding: 8rem 4rem 4rem;
+				position: relative;
+				z-index: 10;
+			}
+
+			/* Hero Section */
+			.blog-hero {
+				text-align: center;
+				margin-bottom: 6rem;
+				padding: 4rem 0;
+			}
+
+			.blog-hero h1 {
+				font-family: "EB Garamond", "Crimson Text", Georgia, serif;
+				font-size: clamp(3rem, 8vw, 6rem);
+				font-weight: 400;
+				letter-spacing: -0.01em;
+				color: var(--deep-brown);
+				margin-bottom: 1.5rem;
+				line-height: 1.1;
+			}
+
+			.blog-hero p {
+				font-family: "Inter", sans-serif;
+				font-size: clamp(1rem, 2vw, 1.3rem);
+				color: var(--text-secondary);
+				font-weight: 300;
+				letter-spacing: 0.05em;
+				max-width: 700px;
+				margin: 0 auto;
+			}
+
+			/* Section Headers */
+			.section-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 3rem;
+				padding-bottom: 1.5rem;
+				border-bottom: 1px solid var(--sand);
+			}
+
+			.section-header h2 {
+				font-family: "EB Garamond", Georgia, serif;
+				font-size: clamp(2rem, 4vw, 3.5rem);
+				font-weight: 400;
+				color: var(--deep-brown);
+				letter-spacing: -0.01em;
+			}
+
+			.section-header .platform-badge {
+				font-family: "Inter", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 500;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+				padding: 0.5rem 1.5rem;
+				border-radius: 50px;
+				transition: all 0.3s ease;
+			}
+
+			.instagram-badge {
+				background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+				color: var(--warm-white);
+			}
+
+			.linkedin-badge {
+				background: #0077b5;
+				color: var(--warm-white);
+			}
+
+			/* Posts Grid */
+			.posts-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+				gap: 2.5rem;
+				margin-bottom: 8rem;
+			}
+
+			/* Post Card */
+			.post-card {
+				background: var(--cream);
+				border-radius: 4px;
+				overflow: hidden;
+				transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+				box-shadow: 0 8px 20px rgba(26, 23, 20, 0.04),
+					0 4px 8px rgba(26, 23, 20, 0.02);
+				cursor: pointer;
+				position: relative;
+			}
+
+			.post-card:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 20px 40px rgba(26, 23, 20, 0.08),
+					0 8px 16px rgba(26, 23, 20, 0.04);
+			}
+
+			.post-card-image {
+				width: 100%;
+				height: 300px;
+				background: var(--sand);
+				position: relative;
+				overflow: hidden;
+			}
+
+			.post-card-image img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+			}
+
+			.post-card:hover .post-card-image img {
+				transform: scale(1.05);
+			}
+
+			.post-card-content {
+				padding: 2rem;
+			}
+
+			.post-meta {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 1rem;
+				font-family: "Inter", sans-serif;
+				font-size: 0.75rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--text-muted);
+			}
+
+			.post-date {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.post-title {
+				font-family: "EB Garamond", Georgia, serif;
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: var(--deep-brown);
+				margin-bottom: 1rem;
+				line-height: 1.3;
+			}
+
+			.post-excerpt {
+				font-family: "Inter", sans-serif;
+				font-size: 0.95rem;
+				line-height: 1.7;
+				color: var(--text-secondary);
+				font-weight: 300;
+			}
+
+			.post-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				margin-top: 1.5rem;
+				font-family: "Inter", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 500;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--terracotta);
+				text-decoration: none;
+				transition: all 0.3s ease;
+			}
+
+			.post-link:hover {
+				color: var(--deep-brown);
+				gap: 0.8rem;
+			}
+
+			/* Navigation */
+			.blog-nav {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				padding: 2rem 4rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background: rgba(250, 249, 246, 0.95);
+				backdrop-filter: blur(10px);
+				z-index: 1000;
+				border-bottom: 1px solid var(--sand);
+			}
+
+			.blog-nav a {
+				font-family: "Inter", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 500;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+				color: var(--text-primary);
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+
+			.blog-nav a:hover {
+				color: var(--terracotta);
+			}
+
+			.nav-brand {
+				font-family: "Inter", sans-serif;
+				font-size: 1.2rem;
+				font-weight: 600;
+				letter-spacing: 0.2em;
+				color: var(--deep-brown);
+			}
+
+			/* Publish Button */
+			.publish-btn {
+				font-family: "Inter", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 500;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+				padding: 0.75rem 2rem;
+				background: var(--terracotta);
+				color: var(--warm-white);
+				border: none;
+				border-radius: 50px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+			.publish-btn:hover {
+				background: var(--deep-brown);
+				transform: translateY(-2px);
+				box-shadow: 0 8px 16px rgba(212, 168, 154, 0.3);
+			}
+
+			/* Modal */
+			.modal {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(26, 23, 20, 0.8);
+				backdrop-filter: blur(10px);
+				z-index: 10000;
+				justify-content: center;
+				align-items: center;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.modal.active {
+				display: flex;
+				opacity: 1;
+			}
+
+			.modal-content {
+				background: var(--warm-white);
+				padding: 3rem;
+				border-radius: 8px;
+				max-width: 600px;
+				width: 90%;
+				max-height: 90vh;
+				overflow-y: auto;
+				box-shadow: 0 20px 60px rgba(26, 23, 20, 0.3);
+				transform: scale(0.9);
+				transition: transform 0.3s ease;
+			}
+
+			.modal.active .modal-content {
+				transform: scale(1);
+			}
+
+			.modal-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 2rem;
+			}
+
+			.modal-title {
+				font-family: "EB Garamond", Georgia, serif;
+				font-size: 2.5rem;
+				font-weight: 400;
+				color: var(--deep-brown);
+			}
+
+			.close-btn {
+				background: none;
+				border: none;
+				font-size: 2rem;
+				color: var(--text-muted);
+				cursor: pointer;
+				transition: color 0.3s ease;
+				padding: 0;
+				width: 40px;
+				height: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.close-btn:hover {
+				color: var(--deep-brown);
+			}
+
+			.form-group {
+				margin-bottom: 1.5rem;
+			}
+
+			.form-label {
+				font-family: "Inter", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 500;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--text-primary);
+				display: block;
+				margin-bottom: 0.5rem;
+			}
+
+			.form-input,
+			.form-textarea {
+				width: 100%;
+				padding: 1rem;
+				border: 1px solid var(--sand);
+				border-radius: 4px;
+				font-family: "Inter", sans-serif;
+				font-size: 0.95rem;
+				color: var(--text-primary);
+				background: var(--cream);
+				transition: all 0.3s ease;
+			}
+
+			.form-input:focus,
+			.form-textarea:focus {
+				outline: none;
+				border-color: var(--terracotta);
+				box-shadow: 0 0 0 3px rgba(212, 168, 154, 0.1);
+			}
+
+			.form-textarea {
+				resize: vertical;
+				min-height: 120px;
+			}
+
+			.form-help {
+				font-family: "Inter", sans-serif;
+				font-size: 0.8rem;
+				color: var(--text-muted);
+				margin-top: 0.3rem;
+			}
+
+			.checkbox-group {
+				display: flex;
+				gap: 1.5rem;
+				margin-top: 0.5rem;
+			}
+
+			.checkbox-label {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				font-family: "Inter", sans-serif;
+				font-size: 0.9rem;
+				color: var(--text-secondary);
+				cursor: pointer;
+			}
+
+			.checkbox-label input[type="checkbox"] {
+				width: 18px;
+				height: 18px;
+				cursor: pointer;
+				accent-color: var(--terracotta);
+			}
+
+			.form-actions {
+				display: flex;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.btn {
+				flex: 1;
+				padding: 1rem 2rem;
+				border: none;
+				border-radius: 4px;
+				font-family: "Inter", sans-serif;
+				font-size: 0.9rem;
+				font-weight: 500;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+			.btn-primary {
+				background: var(--terracotta);
+				color: var(--warm-white);
+			}
+
+			.btn-primary:hover {
+				background: var(--deep-brown);
+			}
+
+			.btn-secondary {
+				background: var(--sand);
+				color: var(--text-primary);
+			}
+
+			.btn-secondary:hover {
+				background: var(--warm-grey);
+			}
+
+			.btn:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+
+			.status-message {
+				padding: 1rem;
+				border-radius: 4px;
+				margin-bottom: 1rem;
+				font-family: "Inter", sans-serif;
+				font-size: 0.9rem;
+				display: none;
+			}
+
+			.status-message.success {
+				background: rgba(168, 181, 160, 0.2);
+				color: var(--olive);
+				border: 1px solid var(--sage);
+				display: block;
+			}
+
+			.status-message.error {
+				background: rgba(212, 168, 154, 0.2);
+				color: var(--sepia);
+				border: 1px solid var(--terracotta);
+				display: block;
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.blog-container {
+					padding: 6rem 2rem 2rem;
+				}
+
+				.blog-nav {
+					padding: 1.5rem 2rem;
+				}
+
+				.posts-grid {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+				}
+
+				.modal-content {
+					padding: 2rem;
+				}
+
+				.modal-title {
+					font-size: 2rem;
+				}
+
+				.form-actions {
+					flex-direction: column;
+				}
+
+				.checkbox-group {
+					flex-direction: column;
+					gap: 1rem;
+				}
+
+				.section-header {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 1rem;
+				}
+
+				.blog-hero {
+					margin-bottom: 4rem;
+					padding: 2rem 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Navigation -->
+		<nav class="blog-nav">
+			<a href="index.html" class="nav-brand">REY VIVAS</a>
+			<a href="index.html">← Volver al inicio</a>
+		</nav>
+
+		<!-- Main Container -->
+		<div class="blog-container">
+			<!-- Hero Section -->
+			<section class="blog-hero">
+				<h1>Blog</h1>
+				<p>
+					Explora mis publicaciones, proyectos y momentos que inspiran mi
+					trabajo.
+				</p>
+			</section>
+
+			<!-- Instagram Section -->
+			<section class="social-section">
+				<div class="section-header">
+					<h2>Instagram</h2>
+					<a
+						href="https://instagram.com/rey.vivas"
+						target="_blank"
+						class="platform-badge instagram-badge"
+						>@rey.vivas</a
+					>
+				</div>
+				<div class="posts-grid">
+					<article
+						class="post-card"
+						onclick="window.open('https://instagram.com/rey.vivas', '_blank')"
+					>
+						<div class="post-card-image">
+							<img
+								src="img/rightSide/bg-rightSide.jpg"
+								alt="Post"
+								loading="lazy"
+							/>
+						</div>
+						<div class="post-card-content">
+							<div class="post-meta">
+								<span class="post-date">📅 Diciembre 2025</span>
+								<span>❤️ 234</span>
+							</div>
+							<h3 class="post-title">Explorando nuevas perspectivas</h3>
+							<p class="post-excerpt">
+								En el mundo del diseño y la creatividad, cada día trae nuevas
+								oportunidades para innovar.
+							</p>
+							<a
+								href="https://instagram.com/rey.vivas"
+								target="_blank"
+								class="post-link"
+								onclick="event.stopPropagation()"
+							>
+								Ver en Instagram →
+							</a>
+						</div>
+					</article>
+
+					<article
+						class="post-card"
+						onclick="window.open('https://instagram.com/rey.vivas', '_blank')"
+					>
+						<div class="post-card-image">
+							<img
+								src="img/rightSide/bg-rightSide.jpg"
+								alt="Post"
+								loading="lazy"
+							/>
+						</div>
+						<div class="post-card-content">
+							<div class="post-meta">
+								<span class="post-date">📅 Diciembre 2025</span>
+								<span>❤️ 189</span>
+							</div>
+							<h3 class="post-title">Arquitectura como arte</h3>
+							<p class="post-excerpt">
+								La inspiración diaria viene de lugares inesperados,
+								transformando conceptos en realidad funcional.
+							</p>
+							<a
+								href="https://instagram.com/rey.vivas"
+								target="_blank"
+								class="post-link"
+								onclick="event.stopPropagation()"
+							>
+								Ver en Instagram →
+							</a>
+						</div>
+					</article>
+
+					<article
+						class="post-card"
+						onclick="window.open('https://instagram.com/rey.vivas', '_blank')"
+					>
+						<div class="post-card-image">
+							<img
+								src="img/rightSide/bg-rightSide.jpg"
+								alt="Post"
+								loading="lazy"
+							/>
+						</div>
+						<div class="post-card-content">
+							<div class="post-meta">
+								<span class="post-date">📅 Diciembre 2025</span>
+								<span>❤️ 312</span>
+							</div>
+							<h3 class="post-title">Proceso creativo</h3>
+							<p class="post-excerpt">
+								Detrás de escena, donde las ideas toman forma y los proyectos
+								cobran vida.
+							</p>
+							<a
+								href="https://instagram.com/rey.vivas"
+								target="_blank"
+								class="post-link"
+								onclick="event.stopPropagation()"
+							>
+								Ver en Instagram →
+							</a>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<!-- LinkedIn Section -->
+			<section class="social-section">
+				<div class="section-header">
+					<h2>LinkedIn</h2>
+					<div style="display: flex; gap: 1rem; align-items: center">
+						<button class="publish-btn" onclick="openPublishModal()">
+							✍️ Publicar
+						</button>
+						<a
+							href="https://linkedin.com/in/reynaldovivas"
+							target="_blank"
+							class="platform-badge linkedin-badge"
+							>Rey Vivas</a
+						>
+					</div>
+				</div>
+				<div class="posts-grid">
+					<article
+						class="post-card"
+						onclick="window.open('https://linkedin.com/in/reynaldovivas', '_blank')"
+					>
+						<div class="post-card-image">
+							<img
+								src="img/rightSide/bg-rightSide.jpg"
+								alt="Post"
+								loading="lazy"
+							/>
+						</div>
+						<div class="post-card-content">
+							<div class="post-meta">
+								<span class="post-date">📅 Diciembre 2025</span>
+							</div>
+							<h3 class="post-title">Liderazgo en la era digital</h3>
+							<p class="post-excerpt">
+								Reflexiones sobre el desarrollo profesional y cómo adaptarse a
+								un mundo en constante cambio.
+							</p>
+							<a
+								href="https://linkedin.com/in/reynaldovivas"
+								target="_blank"
+								class="post-link"
+								onclick="event.stopPropagation()"
+							>
+								Ver en LinkedIn →
+							</a>
+						</div>
+					</article>
+
+					<article
+						class="post-card"
+						onclick="window.open('https://linkedin.com/in/reynaldovivas', '_blank')"
+					>
+						<div class="post-card-image">
+							<img
+								src="img/rightSide/bg-rightSide.jpg"
+								alt="Post"
+								loading="lazy"
+							/>
+						</div>
+						<div class="post-card-content">
+							<div class="post-meta">
+								<span class="post-date">📅 Diciembre 2025</span>
+							</div>
+							<h3 class="post-title">Innovación en Atex Group</h3>
+							<p class="post-excerpt">
+								Nuevos proyectos enfocados en crecimiento sostenible y
+								soluciones innovadoras para el futuro.
+							</p>
+							<a
+								href="https://linkedin.com/in/reynaldovivas"
+								target="_blank"
+								class="post-link"
+								onclick="event.stopPropagation()"
+							>
+								Ver en LinkedIn →
+							</a>
+						</div>
+					</article>
+
+					<article
+						class="post-card"
+						onclick="window.open('https://linkedin.com/in/reynaldovivas', '_blank')"
+					>
+						<div class="post-card-image">
+							<img
+								src="img/rightSide/bg-rightSide.jpg"
+								alt="Post"
+								loading="lazy"
+							/>
+						</div>
+						<div class="post-card-content">
+							<div class="post-meta">
+								<span class="post-date">📅 Diciembre 2025</span>
+							</div>
+							<h3 class="post-title">El poder de la colaboración</h3>
+							<p class="post-excerpt">
+								Construyendo equipos de alto rendimiento a través de la
+								comunicación efectiva y objetivos compartidos.
+							</p>
+							<a
+								href="https://linkedin.com/in/reynaldovivas"
+								target="_blank"
+								class="post-link"
+								onclick="event.stopPropagation()"
+							>
+								Ver en LinkedIn →
+							</a>
+						</div>
+					</article>
+				</div>
+			</section>
+		</div>
+
+		<!-- Publish Modal -->
+		<div id="publishModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title">Crear Publicación</h2>
+					<button class="close-btn" onclick="closePublishModal()">
+						&times;
+					</button>
+				</div>
+
+				<div id="statusMessage" class="status-message"></div>
+
+				<form id="publishForm" onsubmit="handlePublish(event)">
+					<!-- Texto del post -->
+					<div class="form-group">
+						<label class="form-label" for="postText">Texto del Post *</label>
+						<textarea
+							id="postText"
+							class="form-textarea"
+							placeholder="Escribe tu publicación aquí..."
+							required
+						></textarea>
+						<p class="form-help">El contenido principal de tu publicación</p>
+					</div>
+
+					<!-- Link -->
+					<div class="form-group">
+						<label class="form-label" for="postLink">Enlace (Opcional)</label>
+						<input
+							type="url"
+							id="postLink"
+							class="form-input"
+							placeholder="https://ejemplo.com"
+						/>
+						<p class="form-help">URL para compartir con tu post</p>
+					</div>
+
+					<!-- Hashtags -->
+					<div class="form-group">
+						<label class="form-label" for="postHashtags">Hashtags</label>
+						<input
+							type="text"
+							id="postHashtags"
+							class="form-input"
+							placeholder="#tech #innovation #business"
+						/>
+						<p class="form-help">
+							Separa los hashtags con espacios (ej: #tech #startup)
+						</p>
+					</div>
+
+					<!-- Imágenes -->
+					<div class="form-group">
+						<label class="form-label" for="postImages">Imágenes</label>
+						<input
+							type="file"
+							id="postImages"
+							class="form-input"
+							accept="image/*"
+							multiple
+						/>
+						<p class="form-help">
+							Selecciona una o varias imágenes para el post
+						</p>
+					</div>
+
+					<!-- Plataformas -->
+					<div class="form-group">
+						<label class="form-label">Plataformas *</label>
+						<div class="checkbox-group">
+							<label class="checkbox-label">
+								<input
+									type="checkbox"
+									name="platform"
+									value="LinkedIn"
+									checked
+								/>
+								LinkedIn
+							</label>
+							<label class="checkbox-label">
+								<input type="checkbox" name="platform" value="Instagram" />
+								Instagram
+							</label>
+						</div>
+						<p class="form-help">Selecciona dónde quieres publicar</p>
+					</div>
+
+					<!-- Botones -->
+					<div class="form-actions">
+						<button
+							type="button"
+							class="btn btn-secondary"
+							onclick="closePublishModal()"
+						>
+							Cancelar
+						</button>
+						<button type="submit" class="btn btn-primary" id="submitBtn">
+							✨ Crear Publicación
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script>
+			// ============================================
+			// CONFIGURACIÓN DEL WEBHOOK
+			// ============================================
+			const WEBHOOK_CONFIG = {
+				url: "http://localhost/proxy/n8n.php",
+				secret: "ReyV1V4S!",
+			};
+
+			// Abrir modal
+			function openPublishModal() {
+				const modal = document.getElementById("publishModal");
+				modal.classList.add("active");
+				document.body.style.overflow = "hidden";
+			}
+
+			// Cerrar modal
+			function closePublishModal() {
+				const modal = document.getElementById("publishModal");
+				modal.classList.remove("active");
+				document.body.style.overflow = "auto";
+				// Limpiar formulario
+				document.getElementById("publishForm").reset();
+				hideStatusMessage();
+			}
+
+			// Cerrar modal al hacer clic fuera
+			document
+				.getElementById("publishModal")
+				.addEventListener("click", function (e) {
+					if (e.target === this) {
+						closePublishModal();
+					}
+				});
+
+			// Mostrar mensaje de estado
+			function showStatusMessage(message, type) {
+				const statusDiv = document.getElementById("statusMessage");
+				statusDiv.textContent = message;
+				statusDiv.className = `status-message ${type}`;
+			}
+
+			// Ocultar mensaje de estado
+			function hideStatusMessage() {
+				const statusDiv = document.getElementById("statusMessage");
+				statusDiv.className = "status-message";
+				statusDiv.textContent = "";
+			}
+
+			// Manejar publicación
+			async function handlePublish(event) {
+				event.preventDefault();
+
+				const submitBtn = document.getElementById("submitBtn");
+				submitBtn.disabled = true;
+				submitBtn.textContent = "⏳ Publicando...";
+				hideStatusMessage();
+
+				try {
+					// Obtener valores del formulario
+					const text = document.getElementById("postText").value.trim();
+					const link = document.getElementById("postLink").value.trim();
+					const hashtagsInput = document
+						.getElementById("postHashtags")
+						.value.trim();
+
+					// Procesar hashtags
+					const hashtags = hashtagsInput
+						.split(/\s+/)
+						.filter((tag) => tag.startsWith("#"))
+						.map((tag) => tag.trim());
+
+					// Obtener plataformas seleccionadas
+					const platformCheckboxes = document.querySelectorAll(
+						'input[name="platform"]:checked'
+					);
+					const platforms = Array.from(platformCheckboxes).map(
+						(cb) => cb.value
+					);
+
+					if (platforms.length === 0) {
+						throw new Error("Debes seleccionar al menos una plataforma");
+					}
+
+					const imageInput = document.getElementById("postImages");
+					const images = Array.from(imageInput.files || []).map(
+						(file) => file.name
+					);
+
+					// Preparar datos para el webhook
+					const postData = {
+						text,
+						link: link || undefined,
+						hashtags: hashtags.length > 0 ? hashtags : undefined,
+						platforms,
+						images: images.length > 0 ? images : undefined,
+						secret: WEBHOOK_CONFIG.secret,
+					};
+
+					console.log("📤 Enviando publicación:", postData);
+
+					// Realizar fetch
+					const response = await fetch(WEBHOOK_CONFIG.url, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(postData),
+					});
+
+					if (!response.ok) {
+						throw new Error(`Error HTTP: ${response.status}`);
+					}
+
+					const result = await response.json();
+					console.log("✅ Respuesta del webhook:", result);
+
+					if (result.responseBody.ok) {
+						showStatusMessage(`✅ ${result.responseBody.message}`, "success");
+
+						// Limpiar formulario después de 2 segundos
+						setTimeout(() => {
+							closePublishModal();
+						}, 2000);
+					} else {
+						showStatusMessage(`❌ ${result.responseBody.message}`, "error");
+					}
+				} catch (error) {
+					console.error("❌ Error al publicar:", error);
+					showStatusMessage(`❌ Error: ${error.message}`, "error");
+				} finally {
+					submitBtn.disabled = false;
+					submitBtn.textContent = "✨ Crear Publicación";
+				}
+			}
+
+			// Cerrar modal con tecla Escape
+			document.addEventListener("keydown", function (e) {
+				if (e.key === "Escape") {
+					closePublishModal();
+				}
+			});
+		</script>
+	</body>
+</html>

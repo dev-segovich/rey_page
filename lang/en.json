@@ -1,0 +1,21 @@
+{
+	"nav": {
+		"business": "Building spaces",
+		"photos": "Creating Spaces",
+		"b1": "Featured Custom Home",
+		"b2": "Featured Custom Remodel",
+		"b3": "Featured Spec Home",
+		"b4": "Investment Thesis",
+		"b5": "More",
+
+		"p1": "Featured Landscape Collection",
+		"p2": "Featured Wildlife Collection",
+		"p3": "Featured Cityscape Collection",
+		"p4": "linking artist to real estate developers",
+		"p5": "Shop"
+	},
+	"footer": {
+		"aboutMe": "About me",
+		"links": "Links"
+	}
+}
