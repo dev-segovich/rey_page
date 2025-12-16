@@ -841,6 +841,19 @@ class NavHoverEffects {
 		this.rightBgLayer = document.getElementById("right-dynamic-bg");
 
 		this.init();
+		this.preloadImages();
+	}
+
+	preloadImages() {
+		const images = [
+			"img/rightSide/img1.webp",
+			"img/rightSide/img2.webp",
+			"img/rightSide/img3.webp",
+		];
+		images.forEach((src) => {
+			const img = new Image();
+			img.src = src;
+		});
 	}
 
 	init() {
@@ -850,43 +863,12 @@ class NavHoverEffects {
 		this.setupLinkHover("biz-link-3", "left", "video", "vid-3");
 
 		// --- Right Side Links ---
-		// 1. Example 1 -> Image Background
-		this.setupLinkHover(
-			"travel-link-1",
-			"right",
-			"image",
-			"img/rightSide/img1.webp"
-		);
-
-		// 2. Example 2 -> Image Background
-		this.setupLinkHover(
-			"travel-link-2",
-			"right",
-			"image",
-			"img/rightSide/img2.webp"
-		);
-
-		// 3. Example 3 -> Image Background
-		this.setupLinkHover(
-			"travel-link-3",
-			"right",
-			"image",
-			"img/rightSide/img3.webp"
-		);
-
-		this.setupLinkHover(
-			"travel-link-4",
-			"right",
-			"image",
-			"img/rightSide/img1.webp"
-		);
-
-		this.setupLinkHover(
-			"travel-link-5",
-			"right",
-			"image",
-			"img/rightSide/img2.webp"
-		);
+		// Use specific IDs for the layers
+		this.setupLinkHover("travel-link-1", "right", "image-layer", "bg-right-1");
+		this.setupLinkHover("travel-link-2", "right", "image-layer", "bg-right-2");
+		this.setupLinkHover("travel-link-3", "right", "image-layer", "bg-right-3");
+		this.setupLinkHover("travel-link-4", "right", "image-layer", "bg-right-1");
+		this.setupLinkHover("travel-link-5", "right", "image-layer", "bg-right-2");
 	}
 
 	setupLinkHover(linkId, side, type, assetIdOrUrl = "") {
@@ -894,37 +876,38 @@ class NavHoverEffects {
 		if (!link) return;
 
 		const targetSide = side === "left" ? this.leftSide : this.rightSide;
-		const targetBgLayer =
-			side === "left" ? this.leftBgLayer : this.rightBgLayer;
 
 		link.addEventListener("mouseenter", () => {
 			// Logic: "Sticky" background. The last hovered link sets the background state.
-			// We do not revert on mouseleave.
 
 			if (type === "video") {
 				targetSide.classList.remove("show-dynamic-bg");
 				targetSide.classList.add("show-video-background");
 
 				// Logic: Switch active video class
-				// 1. Deactivate all videos
 				const allVideos = targetSide.querySelectorAll(".bg-video");
 				allVideos.forEach((v) => v.classList.remove("active-video"));
 
-				// 2. Activate specific video by ID
 				const activeVideo = document.getElementById(assetIdOrUrl);
 				if (activeVideo) {
 					activeVideo.classList.add("active-video");
-					// Ensure it is playing (should be autoplaying but just in case)
-					// activeVideo.play();
-					// User requested "resume where left off", so we just show it.
-					// Autoplay attribute handles the running state.
 				}
-			} else if (type === "image") {
-				// If image, set the image and show the dynamic layer
-				targetSide.classList.remove("show-video-background"); // This implicitly "hides" the active video container from view context, but keeping opacity logic separate if needed
-
-				targetBgLayer.style.backgroundImage = `url('${assetIdOrUrl}')`;
+			} else if (type === "image-layer") {
+				targetSide.classList.remove("show-video-background");
 				targetSide.classList.add("show-dynamic-bg");
+
+				// Hide all dynamic layers on this side
+				// Note: We select from the document or specific container.
+				// For right side, they are in .right-clipped-container
+				const container = targetSide.querySelector(".right-clipped-container");
+				if (container) {
+					const layers = container.querySelectorAll(".dynamic-bg-layer");
+					layers.forEach((l) => l.classList.remove("active"));
+				}
+
+				// Show target
+				const target = document.getElementById(assetIdOrUrl);
+				if (target) target.classList.add("active");
 			}
 		});
 	}

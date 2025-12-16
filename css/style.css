@@ -300,10 +300,9 @@ body:has(.right-half.expanded) .left-half {
 	z-index: 2;
 	opacity: 0;
 	visibility: hidden;
-	transition: opacity 0.1s ease, visibility 0.1s ease;
 }
 
-.show-dynamic-bg .dynamic-bg-layer {
+.dynamic-bg-layer.active {
 	opacity: 1;
 	visibility: visible;
 }
@@ -320,17 +319,18 @@ body:has(.right-half.expanded) .left-half {
 	will-change: clip-path; /* Optimized for animation */
 }
 
-#right-dynamic-bg {
-	width: 100vw;
-	right: 0;
-	left: auto;
-	background-position: center;
-}
-
 #left-dynamic-bg {
 	width: 100vw;
 	left: 0;
 	right: auto;
+	background-position: center;
+}
+
+/* Restore curtain effect for right side layers */
+.right-clipped-container .dynamic-bg-layer {
+	width: 100vw;
+	right: 0;
+	left: auto;
 	background-position: center;
 }
 
@@ -1088,8 +1088,8 @@ svg {
 	transition: all 0.2s ease;
 	display: block;
 	font-weight: 500;
-	padding-bottom: 4px;
-	padding-top: 4px;
+	padding-bottom: 5px;
+	padding-top: 5px;
 }
 
 .nav-list li a:hover {
@@ -1387,7 +1387,7 @@ body:has(.right-half.expanded) .center-brain-svg {
 
 	/* EXPANDED STATE: Move Right Title to Top-Right Corner */
 	.right-half.expanded .right-nav {
-		top: 25px;
+		top: 50px;
 		left: auto;
 		right: 25px;
 		transform: translate(0, 0);
