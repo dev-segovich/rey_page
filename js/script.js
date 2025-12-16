@@ -447,6 +447,8 @@ class WaveAnimation {
 	animate() {
 		this.time += 0.05;
 
+		const isMobile = window.innerWidth <= 768;
+
 		// Apply decay to velocity (inertia)
 		// 0.9 = long tail, 0.8 = short snappy tail
 		this.momentVelocity *= 0.9;
@@ -456,7 +458,11 @@ class WaveAnimation {
 
 		// Map velocity to a 0-1 factor for interpolation
 		// Sensitivity: changing divider (e.g. / 20) changes how easy it is to trigger max state
-		const velocityFactor = Math.min(safeVelocity / 15, 1);
+		let velocityFactor = Math.min(safeVelocity / 15, 1);
+
+		if (isMobile) {
+			velocityFactor = 0.4;
+		}
 
 		this.currentAmplitude =
 			this.baseAmplitude +
@@ -466,96 +472,128 @@ class WaveAnimation {
 			this.baseFrequency +
 			(this.maxFrequency - this.baseFrequency) * velocityFactor;
 
-		// Generate vertical wave path
-		let pathData = "";
+		let pathDataPixel = "";
 		let clipPathPoints = [];
 
-		const waveRequestX = 30;
+		if (isMobile) {
+			// ============================================
+			// MOBILE: HORIZONTAL WAVE
+			// ============================================
+			const waveRequestY = 30; // Center of 60px height
+			const width = window.innerWidth;
 
-		for (let i = 0; i <= this.segments; i++) {
-			const y = (i / this.segments) * 100; // Percentage
+			// Generate points
+			for (let i = 0; i <= this.segments; i++) {
+				const xPct = i / this.segments;
+				const xPx = xPct * width;
 
-			// BASE WAVE (SINUSOIDAL)
-			let waveForm = Math.sin(this.time + i * this.currentFrequency * 10);
+				// Wave calculation (same logic but applied to Y)
+				let waveForm = Math.sin(this.time + i * this.currentFrequency * 10);
 
-			// EFECTO EKG / ERRÁTICO
-			// Si hay movimiento rápido, añadimos "ruido" aleatorio para hacer picos agudos
-			if (velocityFactor > 0.05) {
-				// Genera un valor aleatorio entre -1 y 1 multiplicado por la velocidad
-				const noise = (Math.random() - 0.5) * 2 * velocityFactor;
-				// Mezclamos la onda suave con el ruido
-				waveForm = waveForm * 0.7 + noise * 0.8;
+				if (velocityFactor > 0.05) {
+					const noise = (Math.random() - 0.5) * 2 * velocityFactor;
+					waveForm = waveForm * 0.7 + noise * 0.8;
+				}
+
+				const offset = waveForm * this.currentAmplitude;
+				const y = waveRequestY + offset;
+
+				pathDataPixel += i === 0 ? `M ${xPx},${y}` : ` L ${xPx},${y}`;
+
+				// For clip-path: x is px, y is px
+				clipPathPoints.push(`${xPx}px ${y}px`);
 			}
 
-			// Calculate final offset
-			const offset = waveForm * this.currentAmplitude;
+			// Update SVG Path
+			this.wavePath.setAttribute("d", pathDataPixel);
 
-			// X position
-			// We use pixels for X since clip-path polygon can mix units
-			const x = waveRequestX + offset;
+			// Create Clip Path Polygon (Bottom part visible)
+			// Points along top edge (wave), then down to bottom-right, bottom-left, close.
+			// Note: clipPathPoints go from left to right.
+			const polygon = `polygon(${clipPathPoints.join(
+				", "
+			)}, 100% 100%, 0% 100%)`;
 
-			if (i === 0) {
-				pathData = `M ${x},0`;
-			} else {
-				pathData += ` L ${x},${y * (window.innerHeight / 100)}`;
+			// Apply clip-path
+			const targets = document.querySelectorAll(
+				".right-background-layer, .carousel-container-vertical, .right-clipped-container"
+			);
+			targets.forEach((el) => {
+				el.style.clipPath = polygon;
+				el.style.webkitClipPath = polygon;
+			});
+
+			// Sync global wave border position
+			const rightSide = document.querySelector(".right-half");
+			if (rightSide) {
+				const rect = rightSide.getBoundingClientRect();
+				const waveContainer = document.querySelector(".wave-border");
+				if (waveContainer) {
+					waveContainer.style.top = `${rect.top}px`;
+					waveContainer.style.left = "0";
+					waveContainer.style.width = "100%";
+					waveContainer.style.height = "60px";
+				}
+			}
+		} else {
+			// ============================================
+			// DESKTOP: VERTICAL WAVE
+			// ============================================
+			const waveRequestX = 30;
+			const height = window.innerHeight;
+
+			for (let i = 0; i <= this.segments; i++) {
+				const yPct = i / this.segments;
+				const yPx = yPct * height;
+
+				// BASE WAVE (SINUSOIDAL)
+				let waveForm = Math.sin(this.time + i * this.currentFrequency * 10);
+
+				// EFECTO EKG / ERRÁTICO
+				if (velocityFactor > 0.05) {
+					const noise = (Math.random() - 0.5) * 2 * velocityFactor;
+					waveForm = waveForm * 0.7 + noise * 0.8;
+				}
+
+				// Calculate final offset
+				const offset = waveForm * this.currentAmplitude;
+
+				// X position
+				const x = waveRequestX + offset;
+
+				pathDataPixel += i === 0 ? `M ${x},${yPx}` : ` L ${x},${yPx}`;
+
+				// Add point for clip-path (x px, y %)
+				clipPathPoints.push(`${x}px ${yPct * 100}%`);
 			}
 
-			// Add point for clip-path (x px, y %)
-			clipPathPoints.push(`${x}px ${y}%`);
-		}
+			this.wavePath.setAttribute("d", pathDataPixel);
 
-		// Scale SVG to match window height manually given viewBox issues with percentage
-		const height = window.innerHeight;
-		// Re-generate SVG path with explicit pixel height for consistency if needed,
-		// using previously calculated percentage-based logic for SVG is fine if viewBox is matching.
-		// But here we simply update the SVG path.
-		// NOTE: SVG in HTML is 100% height. We used 0-100 coordinates in loop?
-		// Let's stick to percentages for SVG Y to match preserveAspectRatio="none" or viewbox behavior
-		// Actually, let's keep SVG simple: M x, y% -> translated to pixels implicitly by SVG scaling?
-		// No, SVG viewBox is 0 0 100 100 (if we set it) or we use pixels.
-		// Let's use pixel coordinates for everything to align perfectly.
+			// Create Clip Path Polygon
+			const polygon = `polygon(${clipPathPoints.join(
+				", "
+			)}, 100% 100%, 100% 0)`;
 
-		let pathDataPixel = "";
-		for (let i = 0; i <= this.segments; i++) {
-			const yPct = i / this.segments;
-			const yPx = yPct * height;
-			const offset =
-				Math.sin(this.time + i * this.currentFrequency * 10) *
-				this.currentAmplitude;
-			const x = waveRequestX + offset;
+			// Apply clip-path
+			const targets = document.querySelectorAll(
+				".right-background-layer, .carousel-container-vertical, .right-clipped-container"
+			);
+			targets.forEach((el) => {
+				el.style.clipPath = polygon;
+				el.style.webkitClipPath = polygon;
+			});
 
-			pathDataPixel += i === 0 ? `M ${x},${yPx}` : ` L ${x},${yPx}`;
-		}
-
-		this.wavePath.setAttribute("d", pathDataPixel);
-
-		// Create Clip Path Polygon
-		// Points down the wave, then to bottom-right, top-right, close.
-		const polygon = `polygon(${clipPathPoints.join(", ")}, 100% 100%, 100% 0)`;
-
-		// Apply clip-path to STABLE LAYERS
-		// 1. The static background layer
-		// 2. The carousel container (which appears on expansion)
-		const targets = document.querySelectorAll(
-			".right-background-layer, .carousel-container-vertical, .right-clipped-container"
-		);
-
-		targets.forEach((el) => {
-			el.style.clipPath = polygon;
-			el.style.webkitClipPath = polygon;
-		});
-
-		// Sync global wave border position to right side
-		// This ensures the invisible SVG wave follows the split line perfectly
-		const rightSide = document.querySelector(".right-half");
-		if (rightSide) {
 			// Sync global wave border position to right side
-			// This ensures the invisible SVG wave follows the split line perfectly
-			const rect = rightSide.getBoundingClientRect();
-			// Wave internal offset logic matches clip-path relative logic
-			const waveContainer = document.querySelector(".wave-border");
-			if (waveContainer) {
-				waveContainer.style.left = `${rect.left}px`;
+			const rightSide = document.querySelector(".right-half");
+			if (rightSide) {
+				const rect = rightSide.getBoundingClientRect();
+				const waveContainer = document.querySelector(".wave-border");
+				if (waveContainer) {
+					waveContainer.style.left = `${rect.left}px`;
+					waveContainer.style.top = "0";
+					waveContainer.style.height = "100vh";
+					waveContainer.style.width = "60px";
+				}
 			}
 		}
 
@@ -703,7 +741,10 @@ class PositionBasedExpansion {
 
 	initMobile() {
 		// Logic for mobile: Click/Tap based expansion with toggle behavior
-		this.leftSide.addEventListener("click", () => {
+		this.leftSide.addEventListener("click", (e) => {
+			// Prevent toggle if clicking a link/list item
+			if (e.target.closest("li") || e.target.closest("a")) return;
+
 			if (this.leftSide.classList.contains("expanded")) {
 				// If already expanded, collapse to neutral state
 				this.leftSide.classList.remove("expanded");
@@ -714,7 +755,10 @@ class PositionBasedExpansion {
 			}
 		});
 
-		this.rightSide.addEventListener("click", () => {
+		this.rightSide.addEventListener("click", (e) => {
+			// Prevent toggle if clicking a link/list item
+			if (e.target.closest("li") || e.target.closest("a")) return;
+
 			if (this.rightSide.classList.contains("expanded")) {
 				// If already expanded, collapse to neutral state
 				this.rightSide.classList.remove("expanded");

@@ -1318,23 +1318,23 @@ body:has(.right-half.expanded) .center-brain-svg {
 		display: none !important;
 	}
 
-	/* Hide wave border on mobile (since split is horizontal) */
+	/* Wave border visible on mobile */
 	.wave-border {
-		display: none;
+		display: block;
+		width: 100%;
+		height: 60px;
+		left: 0;
+		z-index: 999;
+		pointer-events: none;
 	}
 
 	/* Reset margins and clip-paths for Clean Vertical Stack */
 	.right-half {
-		margin-left: 0 !important; /* Remove wave overlap overlap */
+		margin-left: 0 !important; /* Remove horizontal overlap */
+		margin-top: -60px; /* Add vertical overlap for wave */
 	}
 
-	/* Disable wave clip-path on mobile so images are full rectangles */
-	.right-background-layer,
-	.carousel-container-vertical,
-	.right-clipped-container {
-		clip-path: none !important;
-		-webkit-clip-path: none !important;
-	}
+
 
 	/* Override brightness filter for mobile - visible but darker instead of black */
 	body:has(.left-half.expanded) .right-half,
@@ -1472,5 +1472,14 @@ body:has(.coming-soon-link:hover) .center-brain-svg {
 @media (max-width: 768px) {
 	.coming-soon-overlay {
 		font-size: 2.5rem;
+	}
+
+	/* Position Coming Soon in the center of the expanded section */
+	body:has(.left-half.expanded) .coming-soon-overlay {
+		top: 37.5%; /* Center of top 75% */
+	}
+
+	body:has(.right-half.expanded) .coming-soon-overlay {
+		top: 62.5%; /* Center of bottom 75% (25% + 37.5%) */
 	}
 }
