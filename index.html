@@ -5,19 +5,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>REY VIVAS</title>
 		<meta name="description" content="Landing page" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
-			rel="stylesheet"
-		/>
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="img/favicon_white.png" />
+		<!-- Local Fonts -->
+		<link rel="stylesheet" href="css/fonts.css" />
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
 		<!-- Preloader -->
 		<div id="loading-screen">
 			<div class="loader-content">
-				<h1 class="loader-brand">REY VIVAS</h1>
+				<img
+					src="img/signature.png"
+					alt="Rey Vivas Signature"
+					class="loader-brand-img"
+				/>
 				<div class="loader-bar-container">
 					<div class="loader-bar" id="progress-bar"></div>
 				</div>
@@ -30,14 +32,7 @@
 			<!-- Left Side - Business -->
 			<div class="split-half left-half" id="left-side">
 				<!-- Background Video Stack -->
-				<video
-					id="vid-1"
-					class="bg-video"
-					autoplay
-					muted
-					loop
-					playsinline
-				>
+				<video id="vid-1" class="bg-video" autoplay muted loop playsinline>
 					<source src="videos/vid1.mp4" type="video/mp4" />
 				</video>
 				<video id="vid-2" class="bg-video" autoplay muted loop playsinline>
@@ -72,7 +67,11 @@
 							<a href="#" id="biz-link-2" data-i18n="nav.b3"></a>
 						</li>
 						<li>
-							<a href="investment-thesis.html" id="biz-link-4" data-i18n="nav.b4"></a>
+							<a
+								href="investment-thesis.html"
+								id="biz-link-4"
+								data-i18n="nav.b4"
+							></a>
 						</li>
 						<li>
 							<a href="#" class="coming-soon-link" data-i18n="nav.b5"></a>
@@ -88,9 +87,21 @@
 
 				<!-- Dynamic Background Layer for Hover Effects -> Wrapped for Clip Path -->
 				<div class="right-clipped-container">
-					<div class="dynamic-bg-layer" id="bg-right-1" style="background-image: url('img/rightSide/img1.webp')"></div>
-					<div class="dynamic-bg-layer" id="bg-right-2" style="background-image: url('img/rightSide/img2.webp')"></div>
-					<div class="dynamic-bg-layer" id="bg-right-3" style="background-image: url('img/rightSide/img3.webp')"></div>
+					<div
+						class="dynamic-bg-layer"
+						id="bg-right-1"
+						style="background-image: url('img/rightSide/img1.webp')"
+					></div>
+					<div
+						class="dynamic-bg-layer"
+						id="bg-right-2"
+						style="background-image: url('img/rightSide/img2.webp')"
+					></div>
+					<div
+						class="dynamic-bg-layer"
+						id="bg-right-3"
+						style="background-image: url('img/rightSide/img3.webp')"
+					></div>
 				</div>
 
 				<!-- Main Title (centered over carousel) -->
@@ -228,6 +239,26 @@
 				<h2 data-i18n="footer.links">Links</h2>
 			</a>
 		</div>
+
+		<!-- Service Worker Registration -->
+		<script>
+			// Register Service Worker for aggressive video caching
+			if ("serviceWorker" in navigator) {
+				window.addEventListener("load", () => {
+					navigator.serviceWorker
+						.register("./sw.js")
+						.then((registration) => {
+							console.log(
+								"[App] Service Worker registered successfully:",
+								registration.scope
+							);
+						})
+						.catch((error) => {
+							console.log("[App] Service Worker registration failed:", error);
+						});
+				});
+			}
+		</script>
 
 		<script src="js/loader.js"></script>
 		<script src="js/i18n.js"></script>

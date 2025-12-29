@@ -24,12 +24,21 @@ class ResourceLoader {
 
 		// Collect all assets
 		this.domImages = Array.from(document.images);
-		this.videos = Array.from(document.querySelectorAll("video"));
+		this.allVideos = Array.from(document.querySelectorAll("video"));
+
+		// Solo el primer video bloqueará el loader
+		this.primaryVideo = document.getElementById("vid-1") || this.allVideos[0];
+
+		// Videos secundarios se cargarán en background
+		this.backgroundVideos = this.allVideos.filter(
+			(v) => v !== this.primaryVideo
+		);
 
 		// Combine all images (DOM + Manual)
 		this.allImages = [...this.domImages, ...this.manualImages];
 
-		this.totalAssets = this.allImages.length + this.videos.length;
+		// Total assets = imágenes + solo el video principal
+		this.totalAssets = this.allImages.length + (this.primaryVideo ? 1 : 0);
 		this.loadedAssets = 0;
 
 		this.init();
@@ -42,7 +51,12 @@ class ResourceLoader {
 		}
 
 		console.log(
-			`Starting loader. Total assets: ${this.totalAssets} (Images: ${this.allImages.length}, Videos: ${this.videos.length})`
+			`Starting loader. Total assets: ${this.totalAssets} (Images: ${
+				this.allImages.length
+			}, Primary Video: ${this.primaryVideo ? 1 : 0})`
+		);
+		console.log(
+			`Background videos (${this.backgroundVideos.length}) loading in background...`
 		);
 
 		// Monitor All Images (DOM + Manual)
@@ -64,58 +78,76 @@ class ResourceLoader {
 			}
 		});
 
-		// Monitor Videos - STRICT CHECK
-		this.videos.forEach((video) => {
-			// Force preload if not set
-			if (video.preload === "none") {
-				video.preload = "auto";
-			}
+		// Monitor ONLY Primary Video (blocks loader)
+		if (this.primaryVideo) {
+			this.loadVideo(this.primaryVideo, true);
+		}
 
-			let isVideoLoaded = false;
-			let interval = null;
-
-			const onLoaded = () => {
-				if (isVideoLoaded) return;
-				isVideoLoaded = true;
-
-				if (interval) clearInterval(interval);
-
-				this.incrementProgress();
-				video.removeEventListener("canplaythrough", onLoaded);
-				video.removeEventListener("error", onError);
-			};
-
-			const onError = () => {
-				if (isVideoLoaded) return;
-				isVideoLoaded = true;
-
-				if (interval) clearInterval(interval);
-
-				console.warn("Failed to load video:", video.currentSrc || video.src);
-				this.incrementProgress();
-				video.removeEventListener("canplaythrough", onLoaded);
-				video.removeEventListener("error", onError);
-			};
-
-			// Check if already ready (HAVE_ENOUGH_DATA = 4)
-			if (video.readyState === 4) {
-				onLoaded();
-			} else {
-				video.addEventListener("canplaythrough", onLoaded);
-				video.addEventListener("error", onError);
-
-				// Backup: sometimes canplaythrough doesn't fire if it quickly went to readyState 4
-				// We poll readyState just in case events were missed or browser quirks
-				interval = setInterval(() => {
-					if (video.readyState === 4) {
-						onLoaded();
-					}
-				}, 1000);
-
-				// Also trigger load so it actually buffers
-				video.load();
-			}
+		// Load background videos (non-blocking)
+		this.backgroundVideos.forEach((video) => {
+			this.loadVideo(video, false);
 		});
+	}
+
+	// Helper method to load a video
+	loadVideo(video, blockLoader = true) {
+		// Force preload if not set
+		if (video.preload === "none") {
+			video.preload = "auto";
+		}
+
+		let isVideoLoaded = false;
+		let interval = null;
+
+		const onLoaded = () => {
+			if (isVideoLoaded) return;
+			isVideoLoaded = true;
+
+			if (interval) clearInterval(interval);
+
+			if (blockLoader) {
+				this.incrementProgress();
+			} else {
+				console.log(`Background video loaded: ${video.id || video.src}`);
+			}
+
+			video.removeEventListener("canplaythrough", onLoaded);
+			video.removeEventListener("error", onError);
+		};
+
+		const onError = () => {
+			if (isVideoLoaded) return;
+			isVideoLoaded = true;
+
+			if (interval) clearInterval(interval);
+
+			console.warn("Failed to load video:", video.currentSrc || video.src);
+
+			if (blockLoader) {
+				this.incrementProgress();
+			}
+
+			video.removeEventListener("canplaythrough", onLoaded);
+			video.removeEventListener("error", onError);
+		};
+
+		// Check if already ready (HAVE_ENOUGH_DATA = 4)
+		if (video.readyState === 4) {
+			onLoaded();
+		} else {
+			video.addEventListener("canplaythrough", onLoaded);
+			video.addEventListener("error", onError);
+
+			// Backup polling in case events don't fire
+			interval = setInterval(() => {
+				if (video.readyState === 4) {
+					onLoaded();
+				}
+			}, 1000);
+
+			// Trigger load to start buffering
+			video.load();
+		}
 	}
 
 	incrementProgress() {
@@ -151,7 +183,7 @@ class ResourceLoader {
 				this.loadingScreen.classList.add("hidden");
 
 				// Optimization: Try to play videos again to ensure they start if autoplay was blocked/waiting
-				this.videos.forEach((v) => {
+				this.allVideos.forEach((v) => {
 					if (v.paused && v.autoplay) {
 						v.play().catch((e) => console.log("Autoplay caught:", e));
 					}

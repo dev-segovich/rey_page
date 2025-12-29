@@ -86,13 +86,14 @@ body::before {
 	width: 300px;
 }
 
-.loader-brand {
-	font-family: "Inter", sans-serif;
-	font-size: 1.5rem;
-	font-weight: 600;
-	letter-spacing: 0.3em;
-	color: var(--warm-white); /* Inverted: Light text */
-	text-transform: uppercase;
+.loader-brand-img {
+	width: 180px;
+	height: auto;
+	object-fit: contain;
+	margin-bottom: 1rem;
+	/* Ensure visibility on black background: make it white */
+	filter: brightness(0) invert(1);
+	opacity: 0.9;
 }
 
 .loader-bar-container {
@@ -1333,8 +1334,6 @@ body:has(.right-half.expanded) .center-brain-svg {
 		margin-left: 0 !important; /* Remove horizontal overlap */
 		margin-top: -60px; /* Add vertical overlap for wave */
 	}
-
-
 
 	/* Override brightness filter for mobile - visible but darker instead of black */
 	body:has(.left-half.expanded) .right-half,

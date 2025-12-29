@@ -945,7 +945,7 @@ class DynamicBrandText {
 			},
 			{
 				text: "rey_vivas",
-				font: "'Courier New', monospace",
+				font: "'Courier Prime', monospace",
 				letterSpacing: "0.05em",
 				weight: "400",
 				style: "normal",
@@ -994,7 +994,7 @@ class DynamicBrandText {
 			},
 			{
 				text: "vivas",
-				font: "'Courier New', monospace",
+				font: "'Courier Prime', monospace",
 				letterSpacing: "0.2em",
 				weight: "400",
 				style: "italic",
@@ -1015,7 +1015,7 @@ class DynamicBrandText {
 			},
 			{
 				text: "<RV/>",
-				font: "'Courier New', monospace",
+				font: "'Courier Prime', monospace",
 				letterSpacing: "0.1em",
 				weight: "600",
 				style: "normal",
@@ -1029,7 +1029,7 @@ class DynamicBrandText {
 			}, // Ultra thin
 			{
 				text: "яey vivas",
-				font: "'Courier New', monospace",
+				font: "'Courier Prime', monospace",
 				letterSpacing: "0.1em",
 				weight: "500",
 				style: "normal",
@@ -1057,7 +1057,7 @@ class DynamicBrandText {
 			},
 			{
 				text: "{ rey }",
-				font: "'Courier New', monospace",
+				font: "'Courier Prime', monospace",
 				letterSpacing: "0.15em",
 				weight: "400",
 				style: "normal",
