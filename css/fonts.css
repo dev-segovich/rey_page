@@ -1,135 +1,37 @@
 /* ============================================
    LOCAL FONTS - @font-face Definitions
+   Optimized with Variable Fonts
    ============================================ */
 
-/* EB Garamond */
+/* EB Garamond - Variable Font (covers 400-800) */
 @font-face {
 	font-family: "EB Garamond";
-	src: url("../fonts/EB_Garamond/static/EBGaramond-Regular.ttf")
+	src: url("../fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf")
 		format("truetype");
-	font-weight: 400;
+	font-weight: 400 800; /* Rango de pesos soportados */
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
 	font-family: "EB Garamond";
-	src: url("../fonts/EB_Garamond/static/EBGaramond-Italic.ttf")
+	src: url("../fonts/EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf")
 		format("truetype");
-	font-weight: 400;
+	font-weight: 400 800;
 	font-style: italic;
 	font-display: swap;
 }
 
-@font-face {
-	font-family: "EB Garamond";
-	src: url("../fonts/EB_Garamond/static/EBGaramond-Medium.ttf")
-		format("truetype");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "EB Garamond";
-	src: url("../fonts/EB_Garamond/static/EBGaramond-SemiBold.ttf")
-		format("truetype");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "EB Garamond";
-	src: url("../fonts/EB_Garamond/static/EBGaramond-Bold.ttf") format("truetype");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "EB Garamond";
-	src: url("../fonts/EB_Garamond/static/EBGaramond-BoldItalic.ttf")
-		format("truetype");
-	font-weight: 700;
-	font-style: italic;
-	font-display: swap;
-}
-
-/* Inter */
+/* Inter - Variable Font (covers 100-900) */
 @font-face {
 	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-Thin.ttf") format("truetype");
-	font-weight: 100;
+	src: url("../fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+	font-weight: 100 900;
 	font-style: normal;
 	font-display: swap;
 }
 
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-ExtraLight.ttf") format("truetype");
-	font-weight: 200;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-Light.ttf") format("truetype");
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-Regular.ttf") format("truetype");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-Medium.ttf") format("truetype");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-SemiBold.ttf") format("truetype");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-Bold.ttf") format("truetype");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-ExtraBold.ttf") format("truetype");
-	font-weight: 800;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Inter";
-	src: url("../fonts/Inter/static/Inter_18pt-Black.ttf") format("truetype");
-	font-weight: 900;
-	font-style: normal;
-	font-display: swap;
-}
-
-/* Crimson Text */
+/* Crimson Text (Static - No variable font available) */
 @font-face {
 	font-family: "Crimson Text";
 	src: url("../fonts/Crimson_Text/CrimsonText-Regular.ttf") format("truetype");
@@ -156,45 +58,18 @@
 
 @font-face {
 	font-family: "Crimson Text";
-	src: url("../fonts/Crimson_Text/CrimsonText-SemiBoldItalic.ttf")
-		format("truetype");
-	font-weight: 600;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Crimson Text";
 	src: url("../fonts/Crimson_Text/CrimsonText-Bold.ttf") format("truetype");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 
-/* Noto Serif JP (Japanese) */
+/* Noto Serif JP (Static) */
 @font-face {
 	font-family: "Noto Serif JP";
 	src: url("../fonts/Noto_Serif_JP/static/NotoSerifJP-Regular.ttf")
 		format("truetype");
 	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Noto Serif JP";
-	src: url("../fonts/Noto_Serif_JP/static/NotoSerifJP-Medium.ttf")
-		format("truetype");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Noto Serif JP";
-	src: url("../fonts/Noto_Serif_JP/static/NotoSerifJP-SemiBold.ttf")
-		format("truetype");
-	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
 }
@@ -208,7 +83,7 @@
 	font-display: swap;
 }
 
-/* Courier Prime (Alternative to Courier New) */
+/* Courier Prime (Static) */
 @font-face {
 	font-family: "Courier Prime";
 	src: url("../fonts/Courier_Prime/CourierPrime-Regular.ttf") format("truetype");
@@ -219,25 +94,8 @@
 
 @font-face {
 	font-family: "Courier Prime";
-	src: url("../fonts/Courier_Prime/CourierPrime-Italic.ttf") format("truetype");
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Courier Prime";
 	src: url("../fonts/Courier_Prime/CourierPrime-Bold.ttf") format("truetype");
 	font-weight: 700;
 	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Courier Prime";
-	src: url("../fonts/Courier_Prime/CourierPrime-BoldItalic.ttf")
-		format("truetype");
-	font-weight: 700;
-	font-style: italic;
 	font-display: swap;
 }
