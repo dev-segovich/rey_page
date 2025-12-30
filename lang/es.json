@@ -7,12 +7,14 @@
 		"b3": "Casa de Promoción Destacada",
 		"b4": "Tesis de Inversión",
 		"b5": "Más",
+		"b6": "Desarrollo Comercial",
 
 		"p1": "Colección de Paisajes",
 		"p2": "Colección de Vida Silvestre",
 		"p3": "Colección Urbana",
 		"p4": "Conectando artistas con desarrolladores",
 		"p5": "Tienda",
+		"commercial": "Desarrollo Comercial",
 		"more": "Más"
 	},
 	"footer": {

@@ -447,7 +447,7 @@ class WaveAnimation {
 		this.baseFrequency = 0.002; // Reposo: Curvas suaves pero CLARAMENTE VISIBLES
 		this.maxFrequency = 0.001; // Rápido: Picos intermedios
 
-		this.segments = 80; // Performance: Reduced from 400 to 80 (5x faster)
+		this.segments = 400;
 
 		// ==========================================
 		// CONFIGURACIÓN DEL CEREBRO SVG / BRAIN SVG SETTINGS
@@ -923,6 +923,7 @@ class NavHoverEffects {
 		this.setupLinkHover("biz-link-1", "left", "video", "vid-1");
 		this.setupLinkHover("biz-link-2", "left", "video", "vid-2");
 		this.setupLinkHover("biz-link-3", "left", "video", "vid-3");
+		this.setupLinkHover("biz-link-commercial", "left", "video", "vid-4");
 
 		// --- Right Side Links ---
 		// Use specific IDs for the layers

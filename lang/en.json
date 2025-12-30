@@ -7,12 +7,14 @@
 		"b3": "Featured Spec Home",
 		"b4": "Investment Thesis",
 		"b5": "More",
+		"b6": "Commercial Development",
 
 		"p1": "Featured Landscape Collection",
 		"p2": "Featured Wildlife Collection",
 		"p3": "Featured Cityscape Collection",
 		"p4": "linking artist to real estate developers",
-		"p5": "Shop"
+		"p5": "Shop",
+		"commercial": "Commercial Development"
 	},
 	"footer": {
 		"aboutMe": "About me",
