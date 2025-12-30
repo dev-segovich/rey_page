@@ -73,7 +73,10 @@ self.addEventListener("fetch", (event) => {
 					);
 					return fetch(request).then((networkResponse) => {
 						// Clone the response before caching
-						cache.put(request, networkResponse.clone());
+						// FIX: Don't cache partial responses (206) to avoid errors
+						if (networkResponse.status === 200) {
+							cache.put(request, networkResponse.clone());
+						}
 						return networkResponse;
 					});
 				});
@@ -99,7 +102,9 @@ self.addEventListener("fetch", (event) => {
 
 				return fetch(request).then((networkResponse) => {
 					return caches.open(CACHE_NAME).then((cache) => {
-						cache.put(request, networkResponse.clone());
+						if (networkResponse.status === 200) {
+							cache.put(request, networkResponse.clone());
+						}
 						return networkResponse;
 					});
 				});
@@ -124,7 +129,9 @@ self.addEventListener("fetch", (event) => {
 
 				return fetch(request).then((networkResponse) => {
 					return caches.open(CACHE_NAME).then((cache) => {
-						cache.put(request, networkResponse.clone());
+						if (networkResponse.status === 200) {
+							cache.put(request, networkResponse.clone());
+						}
 						return networkResponse;
 					});
 				});
@@ -143,7 +150,9 @@ self.addEventListener("fetch", (event) => {
 
 				return fetch(request).then((networkResponse) => {
 					return caches.open(CACHE_NAME).then((cache) => {
-						cache.put(request, networkResponse.clone());
+						if (networkResponse.status === 200) {
+							cache.put(request, networkResponse.clone());
+						}
 						return networkResponse;
 					});
 				});
@@ -158,7 +167,9 @@ self.addEventListener("fetch", (event) => {
 			fetch(request)
 				.then((networkResponse) => {
 					return caches.open(CACHE_NAME).then((cache) => {
-						cache.put(request, networkResponse.clone());
+						if (networkResponse.status === 200) {
+							cache.put(request, networkResponse.clone());
+						}
 						return networkResponse;
 					});
 				})
