@@ -24,9 +24,91 @@
 			crossorigin
 		/>
 
-		<!-- Local Fonts -->
-		<link rel="stylesheet" href="css/fonts.css" />
-		<link rel="stylesheet" href="css/style.css" />
+		<!-- Preload LCP Critical Images -->
+		<link
+			rel="preload"
+			as="image"
+			href="img/rightSide/img1.webp"
+			fetchpriority="high"
+		/>
+		<link rel="preload" as="image" href="img/signature.png" />
+
+		<!-- Critical CSS Inline for faster FCP -->
+		<style>
+			/* Critical CSS - only essential styles for initial render */
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+				background: #faf9f6;
+				color: #1a1714;
+				overflow: hidden;
+				min-height: 100vh;
+				position: relative;
+				font-weight: 300;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			#loading-screen {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: #000;
+				z-index: 9999;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				transition: opacity 0.8s ease, visibility 0.8s ease;
+			}
+			#loading-screen.hidden {
+				opacity: 0;
+				visibility: hidden;
+				pointer-events: none;
+			}
+			.loader-content {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 1.5rem;
+				width: 300px;
+			}
+			.loader-brand-img {
+				width: 180px;
+				height: auto;
+				object-fit: contain;
+				margin-bottom: 1rem;
+				filter: brightness(0) invert(1);
+				opacity: 0.9;
+			}
+			.split-container {
+				display: flex;
+				width: 100%;
+				height: 100vh;
+				position: relative;
+			}
+		</style>
+
+		<!-- Local Fonts - Load asynchronously to avoid render blocking -->
+		<link
+			rel="preload"
+			href="css/fonts.css"
+			as="style"
+			onload="this.onload=null;this.rel='stylesheet'"
+		/>
+		<noscript><link rel="stylesheet" href="css/fonts.css" /></noscript>
+		<!-- Main CSS - Load asynchronously to avoid render blocking -->
+		<link
+			rel="preload"
+			href="css/style.min.css"
+			as="style"
+			onload="this.onload=null;this.rel='stylesheet'"
+		/>
+		<noscript><link rel="stylesheet" href="css/style.min.css" /></noscript>
 	</head>
 	<body>
 		<!-- Preloader -->
@@ -36,6 +118,9 @@
 					src="img/signature.png"
 					alt="Rey Vivas Signature"
 					class="loader-brand-img"
+					width="180"
+					height="72"
+					fetchpriority="high"
 				/>
 				<div class="loader-bar-container">
 					<div class="loader-bar" id="progress-bar"></div>
@@ -100,7 +185,8 @@
 			<!-- Right Side - Travel/Creative -->
 			<div class="split-half right-half" id="right-side">
 				<!-- Dedicated Background Layer for Stability -->
-				<div class="right-background-layer"></div>
+				<!-- LCP element with high priority -->
+				<div class="right-background-layer" fetchpriority="high"></div>
 
 				<!-- Dynamic Background Layer for Hover Effects -> Wrapped for Clip Path -->
 				<div class="right-clipped-container">
@@ -277,8 +363,9 @@
 			}
 		</script>
 
-		<script src="js/loader.js"></script>
-		<script src="js/i18n.js"></script>
-		<script src="js/script.js"></script>
+		<!-- Load scripts with defer for better performance -->
+		<script defer src="js/loader.js"></script>
+		<script defer src="js/i18n.js"></script>
+		<script defer src="js/script.min.js"></script>
 	</body>
 </html>

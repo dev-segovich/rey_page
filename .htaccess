@@ -9,12 +9,12 @@
     ExpiresByType video/mp4 "access plus 30 days"
     ExpiresByType video/webm "access plus 30 days"
     
-    # Images - Cache for 7 days
-    ExpiresByType image/jpeg "access plus 7 days"
-    ExpiresByType image/jpg "access plus 7 days"
-    ExpiresByType image/png "access plus 7 days"
-    ExpiresByType image/webp "access plus 7 days"
-    ExpiresByType image/svg+xml "access plus 7 days"
+    # Images - Cache for 1 year (static assets)
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
     
     # Fonts - Cache for 1 year
     ExpiresByType font/ttf "access plus 1 year"
@@ -24,10 +24,10 @@
     ExpiresByType application/font-woff "access plus 1 year"
     ExpiresByType application/font-woff2 "access plus 1 year"
     
-    # CSS and JavaScript - Cache for 7 days
-    ExpiresByType text/css "access plus 7 days"
-    ExpiresByType application/javascript "access plus 7 days"
-    ExpiresByType text/javascript "access plus 7 days"
+    # CSS and JavaScript - Cache for 1 year (use versioning for updates)
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
     
     # HTML - Cache for 1 hour (para que cambios se vean rápido)
     ExpiresByType text/html "access plus 1 hour"
@@ -39,9 +39,9 @@
         Header set Cache-Control "public, max-age=2592000, immutable"
     </FilesMatch>
     
-    # Images - Cache moderado
+    # Images - Cache agresivo 1 año
     <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
-        Header set Cache-Control "public, max-age=604800"
+        Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
     
     # Fonts - Cache agresivo 1 año
@@ -49,9 +49,9 @@
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
     
-    # CSS y JS - Cache moderado
+    # CSS y JS - Cache agresivo 1 año
     <FilesMatch "\.(css|js)$">
-        Header set Cache-Control "public, max-age=604800"
+        Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
     
     # HTML - Cache corto

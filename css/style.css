@@ -133,6 +133,8 @@ body::before {
    ============================================ */
 .split-half {
 	flex: 1;
+	flex-basis: 50%; /* Explicit basis to prevent CLS */
+	width: 50%; /* Explicit width fallback */
 	position: relative;
 	overflow: hidden;
 	display: flex;
@@ -277,6 +279,9 @@ body:has(.right-half.expanded) .left-half {
 	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
 		url("../img/rightSide/img1.webp") center/cover no-repeat;
 	pointer-events: none;
+	/* Performance optimizations for GPU acceleration */
+	will-change: transform;
+	transform: translateZ(0);
 }
 
 /* .right-half.expanded .right-background-layer removed to keep background visible */
@@ -767,6 +772,12 @@ canvas {
 	filter: drop-shadow(0 25px 50px rgba(26, 23, 20, 0.06));
 	transition: flex 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
 	opacity: 0.95;
+	/* Prevent CLS */
+	width: 300px;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 /* Brain moves elegantly - only horizontal */
@@ -785,6 +796,7 @@ canvas {
 .brain-svg {
 	width: clamp(240px, 35vw, 500px);
 	height: auto;
+	aspect-ratio: 190.496 / 190.497; /* Match viewBox for zero CLS */
 	animation: gentle-float 10s ease-in-out infinite;
 }
 

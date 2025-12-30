@@ -1,4 +1,58 @@
 // ============================================
+// PERFORMANCE CACHE - Eliminates forced reflows
+// ============================================
+class PerformanceCache {
+	constructor() {
+		this.windowWidth = window.innerWidth;
+		this.windowHeight = window.innerHeight;
+		this.isMobile = this.windowWidth <= 768;
+		this.cachedRects = new Map();
+		this.cachedPathLengths = new Map();
+		this.resizeTimeout = null;
+		this.init();
+	}
+
+	init() {
+		window.addEventListener(
+			"resize",
+			() => {
+				clearTimeout(this.resizeTimeout);
+				this.resizeTimeout = setTimeout(() => this.updateDimensions(), 150);
+			},
+			{ passive: true }
+		);
+		this.updateDimensions();
+	}
+
+	updateDimensions() {
+		this.windowWidth = window.innerWidth;
+		this.windowHeight = window.innerHeight;
+		this.isMobile = this.windowWidth <= 768;
+		this.cachedRects.clear();
+	}
+
+	getRect(element, cacheKey) {
+		if (!this.cachedRects.has(cacheKey)) {
+			this.cachedRects.set(cacheKey, element.getBoundingClientRect());
+		}
+		return this.cachedRects.get(cacheKey);
+	}
+
+	getPathLength(path, cacheKey) {
+		if (!this.cachedPathLengths.has(cacheKey)) {
+			this.cachedPathLengths.set(cacheKey, path.getTotalLength());
+		}
+		return this.cachedPathLengths.get(cacheKey);
+	}
+
+	invalidateRectCache() {
+		this.cachedRects.clear();
+	}
+}
+
+const perfCache = new PerformanceCache();
+
+// ============================================
 // ULTRA MINIMAL AESTHETIC - LEFT SIDE
 // Barely visible, editorial style
 // ============================================
@@ -390,10 +444,10 @@ class WaveAnimation {
 		this.baseAmplitude = 2; // Reposo: Onda visible siempre (antes 10)
 		this.maxAmplitude = 20; // Rápido: Picos estilo EKG
 
-		this.baseFrequency = 0.002; // Reposo: Curvas suaves pero CLARAMENTE VISIBLES (antes 0.001 era recta)
+		this.baseFrequency = 0.002; // Reposo: Curvas suaves pero CLARAMENTE VISIBLES
 		this.maxFrequency = 0.001; // Rápido: Picos intermedios
 
-		this.segments = 400; // Resolución balanceada para rendimiento y suavidad
+		this.segments = 80; // Performance: Reduced from 400 to 80 (5x faster)
 
 		// ==========================================
 		// CONFIGURACIÓN DEL CEREBRO SVG / BRAIN SVG SETTINGS
@@ -447,7 +501,7 @@ class WaveAnimation {
 	animate() {
 		this.time += 0.05;
 
-		const isMobile = window.innerWidth <= 768;
+		const isMobile = perfCache.isMobile;
 
 		// Apply decay to velocity (inertia)
 		// 0.9 = long tail, 0.8 = short snappy tail
@@ -480,7 +534,7 @@ class WaveAnimation {
 			// MOBILE: HORIZONTAL WAVE
 			// ============================================
 			const waveRequestY = 30; // Center of 60px height
-			const width = window.innerWidth;
+			const width = perfCache.windowWidth;
 
 			// Generate points
 			for (let i = 0; i <= this.segments; i++) {
@@ -526,10 +580,14 @@ class WaveAnimation {
 			// Sync global wave border position
 			const rightSide = document.querySelector(".right-half");
 			if (rightSide) {
-				const rect = rightSide.getBoundingClientRect();
+				this.rectUpdateCounter++;
+				if (this.rectUpdateCounter % 10 === 0) {
+					perfCache.invalidateRectCache();
+				}
+				const rect = perfCache.getRect(rightSide, "right-half-mobile");
 				const waveContainer = document.querySelector(".wave-border");
 				if (waveContainer) {
-					waveContainer.style.top = `${rect.top}px`;
+					waveContainer.style.transform = `translateY(${rect.top}px)`;
 					waveContainer.style.left = "0";
 					waveContainer.style.width = "100%";
 					waveContainer.style.height = "60px";
@@ -540,7 +598,7 @@ class WaveAnimation {
 			// DESKTOP: VERTICAL WAVE
 			// ============================================
 			const waveRequestX = 30;
-			const height = window.innerHeight;
+			const height = perfCache.windowHeight;
 
 			for (let i = 0; i <= this.segments; i++) {
 				const yPct = i / this.segments;
@@ -586,10 +644,14 @@ class WaveAnimation {
 			// Sync global wave border position to right side
 			const rightSide = document.querySelector(".right-half");
 			if (rightSide) {
-				const rect = rightSide.getBoundingClientRect();
+				this.rectUpdateCounter++;
+				if (this.rectUpdateCounter % 10 === 0) {
+					perfCache.invalidateRectCache();
+				}
+				const rect = perfCache.getRect(rightSide, "right-half-desktop");
 				const waveContainer = document.querySelector(".wave-border");
 				if (waveContainer) {
-					waveContainer.style.left = `${rect.left}px`;
+					waveContainer.style.transform = `translateX(${rect.left}px)`;
 					waveContainer.style.top = "0";
 					waveContainer.style.height = "100vh";
 					waveContainer.style.width = "60px";
