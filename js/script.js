@@ -924,6 +924,7 @@ class NavHoverEffects {
 		this.setupLinkHover("biz-link-2", "left", "video", "vid-2");
 		this.setupLinkHover("biz-link-3", "left", "video", "vid-3");
 		this.setupLinkHover("biz-link-commercial", "left", "video", "vid-4");
+		this.setupLinkHover("biz-link-feasibility", "left", "video", "vid-5");
 
 		// --- Right Side Links ---
 		// Use specific IDs for the layers
@@ -954,6 +955,8 @@ class NavHoverEffects {
 				const activeVideo = document.getElementById(assetIdOrUrl);
 				if (activeVideo) {
 					activeVideo.classList.add("active-video");
+					// Force play in case browser paused it for optimization
+					activeVideo.play().catch((e) => console.log("Video play locked:", e));
 				}
 			} else if (type === "image-layer") {
 				targetSide.classList.remove("show-video-background");

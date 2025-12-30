@@ -3,8 +3,8 @@
 // Cache-first for videos, Network-first for HTML
 // ============================================
 
-const CACHE_NAME = "rey-vivas-v1";
-const VIDEO_CACHE = "rey-vivas-videos-v1";
+const CACHE_NAME = "rey-vivas-v2";
+const VIDEO_CACHE = "rey-vivas-videos-v2";
 
 // Assets que se cachearán bajo demanda (lazy caching)
 // Ya no intentamos pre-cachearlos durante la instalación para evitar problemas con rutas
