@@ -1,3 +1,5 @@
+//Ejecutar: node minify_js.js
+
 const fs = require("fs");
 const Terser = require("terser");
 
