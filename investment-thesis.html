@@ -37,8 +37,29 @@
 				font-weight: 400;
 				letter-spacing: -0.01em;
 				color: var(--deep-brown);
-				margin-bottom: 1.5rem;
+				margin-bottom: 0.5rem;
 				line-height: 1.1;
+			}
+
+			.thesis-header .thesis-main-subtitle {
+				font-family: "EB Garamond", "Crimson Text", Georgia, serif;
+				font-size: clamp(1.5rem, 3vw, 2.2rem);
+				font-weight: 400;
+				font-style: italic;
+				color: var(--terracotta);
+				margin-bottom: 1.5rem;
+				letter-spacing: 0.01em;
+			}
+
+			.thesis-header .thesis-orchestra-title {
+				font-family: "Inter", sans-serif;
+				font-size: clamp(0.85rem, 1.5vw, 1rem);
+				color: var(--text-secondary);
+				font-weight: 500;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				max-width: 700px;
+				margin: 0 auto 1.5rem;
 			}
 
 			.thesis-header p {
@@ -85,6 +106,25 @@
 				margin-bottom: 1.5rem;
 				font-weight: 300;
 				text-align: justify;
+			}
+
+			.thesis-closing {
+				margin-top: 4rem;
+				padding: 3rem;
+				border-top: 1px solid var(--sand);
+				border-bottom: 1px solid var(--sand);
+				text-align: center;
+			}
+
+			.thesis-closing p {
+				font-family: "EB Garamond", "Crimson Text", Georgia, serif;
+				font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+				font-style: italic;
+				line-height: 1.9;
+				color: var(--deep-brown);
+				font-weight: 400;
+				text-align: center;
+				margin: 0;
 			}
 
 			.thesis-nav {
@@ -234,6 +274,19 @@
 				color: rgba(255, 255, 255, 0.5);
 			}
 
+			.footer-disclaimer {
+				font-family: "Inter", sans-serif;
+				font-size: 0.72rem;
+				color: rgba(255, 255, 255, 0.28);
+				text-decoration: none;
+				letter-spacing: 0.04em;
+				transition: color 0.3s ease;
+			}
+
+			.footer-disclaimer:hover {
+				color: rgba(255, 255, 255, 0.6);
+			}
+
 			@media (max-width: 768px) {
 				.thesis-nav {
 					padding: 1.5rem 2rem;
@@ -244,6 +297,9 @@
 				.thesis-table {
 					display: block;
 					overflow-x: auto;
+				}
+				.thesis-closing {
+					padding: 2rem 1.5rem;
 				}
 			}
 		</style>
@@ -260,12 +316,14 @@
 			<!-- Introduction -->
 			<div class="thesis-header">
 				<h1 data-i18n="thesis.title"></h1>
-				<p data-i18n="thesis.subtitle"></p>
+				<div class="thesis-main-subtitle" data-i18n="thesis.subtitle"></div>
+				<div class="thesis-orchestra-title" data-i18n="thesis.orchestra_title"></div>
 			</div>
 
 			<section class="thesis-section">
 				<p data-i18n="thesis.intro.p1"></p>
 				<p data-i18n="thesis.intro.p2"></p>
+				<p data-i18n="thesis.intro.p3"></p>
 			</section>
 
 			<!-- Thesis 1 -->
@@ -275,6 +333,10 @@
 				<p data-i18n="thesis.section1.desc"></p>
 
 				<h3 data-i18n="thesis.section1.opportunity"></h3>
+				<p>
+					<strong data-i18n="thesis.section1.p0_title"></strong>
+					<span data-i18n="thesis.section1.p0_text"></span>
+				</p>
 				<p>
 					<strong data-i18n="thesis.section1.p1_title"></strong>
 					<span data-i18n="thesis.section1.p1_text"></span>
@@ -296,6 +358,10 @@
 				<p data-i18n="thesis.section2.desc"></p>
 
 				<h3 data-i18n="thesis.section2.gateway"></h3>
+				<p>
+					<strong data-i18n="thesis.section2.p0_title"></strong>
+					<span data-i18n="thesis.section2.p0_text"></span>
+				</p>
 				<p>
 					<strong data-i18n="thesis.section2.p1_title"></strong>
 					<span data-i18n="thesis.section2.p1_text"></span>
@@ -354,6 +420,11 @@
 					<span data-i18n="thesis.section3.rv2_text"></span>
 				</p>
 			</section>
+
+			<!-- Closing Statement -->
+			<div class="thesis-closing">
+				<p data-i18n="thesis.closing.text"></p>
+			</div>
 		</div>
 
 		<!-- Footer -->
@@ -373,6 +444,7 @@
 					></a>
 				</div>
 				<div class="footer-copyright" data-i18n="footer.copyright"></div>
+				<a href="disclaimer.html" class="footer-disclaimer">Disclaimer &amp; Terms of Use</a>
 			</div>
 		</footer>
 

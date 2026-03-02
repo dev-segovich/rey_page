@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Disclaimer & Terms of Use - REY VIVAS</title>
+		<meta
+			name="description"
+			content="Disclaimer and Terms of Use for reyvivas.com — informational purposes, no professional-client relationship, corporate affiliations, intellectual property, and limitation of liability."
+		/>
+		<meta name="robots" content="noindex, follow" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			body {
+				overflow-y: auto;
+				background: var(--warm-white);
+			}
+
+			/* ── Navigation ── */
+			.disc-nav {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				padding: 1.6rem 4rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background: rgba(250, 249, 246, 0.95);
+				backdrop-filter: blur(10px);
+				z-index: 1000;
+				border-bottom: 1px solid var(--sand);
+			}
+
+			.disc-nav .nav-brand {
+				font-family: "Inter", sans-serif;
+				font-size: 1.2rem;
+				font-weight: 600;
+				letter-spacing: 0.2em;
+				color: var(--deep-brown);
+				text-decoration: none;
+			}
+
+			.disc-nav .nav-back {
+				font-family: "Inter", sans-serif;
+				font-size: 0.82rem;
+				font-weight: 500;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+				color: var(--text-primary);
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+
+			.disc-nav .nav-back:hover {
+				color: var(--terracotta);
+			}
+
+			/* ── Container ── */
+			.disc-container {
+				max-width: 860px;
+				margin: 0 auto;
+				padding: 8rem 2rem 5rem;
+			}
+
+			/* ── Header ── */
+			.disc-header {
+				text-align: center;
+				margin-bottom: 4rem;
+				padding-bottom: 3rem;
+				border-bottom: 1px solid var(--sand);
+			}
+
+			.disc-header .disc-eyebrow {
+				font-family: "Inter", sans-serif;
+				font-size: 0.75rem;
+				font-weight: 500;
+				letter-spacing: 0.22em;
+				text-transform: uppercase;
+				color: var(--terracotta);
+				margin-bottom: 1rem;
+			}
+
+			.disc-header h1 {
+				font-family: "EB Garamond", "Crimson Text", Georgia, serif;
+				font-size: clamp(2rem, 4.5vw, 3.4rem);
+				font-weight: 400;
+				letter-spacing: -0.01em;
+				color: var(--deep-brown);
+				line-height: 1.15;
+				margin-bottom: 1.2rem;
+			}
+
+			.disc-header .disc-date {
+				font-family: "Inter", sans-serif;
+				font-size: 0.82rem;
+				color: var(--text-muted);
+				font-weight: 300;
+				letter-spacing: 0.05em;
+			}
+
+			/* ── Sections ── */
+			.disc-section {
+				margin-bottom: 3rem;
+			}
+
+			.disc-section h2 {
+				font-family: "Inter", sans-serif;
+				font-size: 0.78rem;
+				font-weight: 600;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: var(--terracotta);
+				margin-bottom: 0.9rem;
+			}
+
+			.disc-section p,
+			.disc-section li {
+				font-family: "Inter", sans-serif;
+				font-size: 0.97rem;
+				line-height: 1.85;
+				color: var(--text-secondary);
+				font-weight: 300;
+			}
+
+			.disc-section p {
+				margin-bottom: 1rem;
+			}
+
+			.disc-section ul {
+				list-style: none;
+				padding: 0;
+				margin: 0.6rem 0 1rem 0;
+			}
+
+			.disc-section ul li {
+				padding: 0.35rem 0 0.35rem 1.4rem;
+				position: relative;
+				border-bottom: 1px solid rgba(232, 227, 216, 0.6);
+			}
+
+			.disc-section ul li:last-child {
+				border-bottom: none;
+			}
+
+			.disc-section ul li::before {
+				content: "—";
+				position: absolute;
+				left: 0;
+				color: var(--terracotta);
+				font-size: 0.85rem;
+				top: 0.42rem;
+			}
+
+			.disc-section ul li strong {
+				font-weight: 500;
+				color: var(--deep-brown);
+			}
+
+			.disc-section ul li span {
+				color: var(--text-muted);
+				font-size: 0.88rem;
+			}
+
+			/* Divider */
+			.disc-divider {
+				border: none;
+				border-top: 1px solid var(--sand);
+				margin: 3rem 0;
+			}
+
+			/* ── Footer ── */
+			.disc-footer {
+				background: var(--deep-brown);
+				color: var(--cream);
+				padding: 3.5rem 2rem;
+				margin-top: 4rem;
+			}
+
+			.disc-footer-inner {
+				max-width: 860px;
+				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 1.5rem;
+			}
+
+			.disc-footer-brand {
+				font-family: "Inter", sans-serif;
+				font-size: 1.3rem;
+				font-weight: 600;
+				letter-spacing: 0.2em;
+			}
+
+			.disc-footer-links {
+				display: flex;
+				gap: 2rem;
+			}
+
+			.disc-footer-links a {
+				color: var(--cream);
+				text-decoration: none;
+				font-family: "Inter", sans-serif;
+				font-size: 0.95rem;
+				transition: color 0.3s ease;
+			}
+
+			.disc-footer-links a:hover {
+				color: var(--terracotta);
+			}
+
+			.disc-footer-copy {
+				font-family: "Inter", sans-serif;
+				font-size: 0.75rem;
+				color: rgba(255, 255, 255, 0.45);
+				text-align: center;
+			}
+
+			@media (max-width: 768px) {
+				.disc-nav {
+					padding: 1.2rem 1.5rem;
+				}
+				.disc-container {
+					padding: 6rem 1.25rem 4rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Navigation -->
+		<nav class="disc-nav">
+			<a href="index.html" class="nav-brand">REY VIVAS</a>
+			<a href="index.html" class="nav-back">← Back to Home</a>
+		</nav>
+
+		<div class="disc-container">
+			<!-- Header -->
+			<div class="disc-header">
+				<div class="disc-eyebrow">Legal</div>
+				<h1>Disclaimer &amp; Terms of Use</h1>
+				<div class="disc-date">www.reyvivas.com &mdash; Reynaldo Vivas</div>
+			</div>
+
+			<!-- 1. General Information -->
+			<section class="disc-section" id="general-information">
+				<h2>1. General Information Only</h2>
+				<p>
+					The content provided on this website (<strong>www.reyvivas.com</strong>) is for informational and personal branding
+					purposes by Reynaldo Vivas. While every effort is made to provide accurate information regarding real estate
+					development, project management, and industry trends, all content is provided <em>"as is"</em> without any express
+					or implied warranties.
+				</p>
+			</section>
+
+			<hr class="disc-divider" />
+
+			<!-- 2. No Professional-Client Relationship -->
+			<section class="disc-section" id="no-professional-relationship">
+				<h2>2. No Professional-Client Relationship</h2>
+				<p>
+					Your use of this website or communication with Reynaldo Vivas through this site does not establish a
+					professional-client, advisory, or fiduciary relationship. The insights shared here—including those related to real
+					estate feasibility, construction, or LEED standards—should not be construed as legal, financial, or architectural
+					advice. For specific project needs, you should consult with licensed professionals in the appropriate jurisdiction.
+				</p>
+			</section>
+
+			<hr class="disc-divider" />
+
+			<!-- 3. Corporate Affiliations -->
+			<section class="disc-section" id="corporate-affiliations">
+				<h2>3. Corporate Affiliations</h2>
+				<p>
+					Reynaldo Vivas serves in various capacities across multiple organizations. The views expressed on this personal
+					website are his own and do not necessarily reflect the official positions or policies of:
+				</p>
+				<ul>
+					<li>
+						<strong>Atex Group</strong>
+						<span>&mdash; Owner representation &amp; advisory</span>
+					</li>
+					<li>
+						<strong>Zero to Plan</strong>
+						<span>&mdash; Real estate feasibility analysis</span>
+					</li>
+					<li>
+						<strong>Marston</strong>
+						<span>&mdash; Real estate development &amp; investment</span>
+					</li>
+					<li>
+						<strong>Marston Foundation</strong>
+						<span>&mdash; Faith-based development &amp; workforce initiatives</span>
+					</li>
+					<li>
+						<strong>GME Family Office</strong>
+						<span>&mdash; Wealth management &amp; family office services</span>
+					</li>
+				</ul>
+			</section>
+
+			<hr class="disc-divider" />
+
+			<!-- 4. Third-Party Links -->
+			<section class="disc-section" id="third-party-links">
+				<h2>4. Third-Party Links</h2>
+				<p>
+					This website may contain links to external sites, including those listed above. Reynaldo Vivas is not responsible
+					for the content, privacy policies, or practices of any third-party websites. Reference to any specific commercial
+					products or services does not constitute or imply endorsement.
+				</p>
+			</section>
+
+			<hr class="disc-divider" />
+
+			<!-- 5. Intellectual Property -->
+			<section class="disc-section" id="intellectual-property">
+				<h2>5. Intellectual Property and Creative Work</h2>
+				<p>
+					All original content, including text, logos, and signature branding, is the property of Reynaldo Vivas unless
+					otherwise noted.
+				</p>
+				<p>
+					<strong>Photography:</strong> All landscape and wildlife photography featured on this site is original work. These
+					images are protected by copyright law. Unauthorized use, reproduction, or distribution without express written
+					consent is strictly prohibited.
+				</p>
+				<p>
+					<strong>Project Media:</strong> Certain project renderings and architectural visualizations are the property of
+					their respective firms (Atex Group, Zero to Plan, or Marston) and are used here for portfolio and illustrative
+					purposes only.
+				</p>
+			</section>
+
+			<hr class="disc-divider" />
+
+			<!-- 6. Limitation of Liability -->
+			<section class="disc-section" id="limitation-of-liability">
+				<h2>6. Limitation of Liability</h2>
+				<p>
+					Under no circumstances shall Reynaldo Vivas be liable for any loss or damage, including without limitation,
+					indirect or consequential loss or damage, arising from the loss of data or profits appearing out of, or in
+					connection with, the use of this website.
+				</p>
+			</section>
+
+			<hr class="disc-divider" />
+
+			<!-- 7. Forward-Looking Statements -->
+			<section class="disc-section" id="forward-looking-statements">
+				<h2>7. Forward-Looking Statements</h2>
+				<p>
+					Any mention of "coming soon" projects or future development plans involves risks and uncertainties. Actual results
+					and project outcomes may differ materially from those expressed or implied in any statements found on this site.
+				</p>
+			</section>
+		</div>
+
+		<!-- Footer -->
+		<footer class="disc-footer">
+			<div class="disc-footer-inner">
+				<div class="disc-footer-brand">REY VIVAS</div>
+				<div class="disc-footer-links">
+					<a href="https://www.linkedin.com/in/reynaldovivas/" target="_blank">About me</a>
+					<a href="https://reylinks.reyvivas.com" target="_blank">Links</a>
+				</div>
+				<div class="disc-footer-copy">
+					&copy; 2025 Rey Vivas. All rights reserved.
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

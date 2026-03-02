@@ -24,16 +24,20 @@
 	},
 	"thesis": {
 		"title": "My Investment Philosophy",
-		"subtitle": "The Orchestra of Value Creation",
+		"subtitle": "The Bifurcated Symphony",
+		"orchestra_title": "The Orchestra of Value Creation",
 		"intro": {
 			"p1": "I view real estate as the critical intersection of beauty, art, and rigorous financial arithmetic. As a Civil Engineer trained in Real Estate Finance, I serve as the Orchestra Director—leading specialized teams to ensure every project is perfectly synchronized. If the design, the financial model, and the community impact don't work for all stakeholders, \"the music won't play.\"",
-			"p2": "My strategies target the greatest areas of market misalignment where disciplined execution creates profound, intrinsic value. ATEX Group is the vehicle I trust to translate this vision into tangible, high-performing assets."
+			"p2": "In today's increasingly polarized economic landscape—the \"K-Shaped\" recovery—the middle market is fraught with volatility. I have intentionally positioned my portfolio at the two most resilient points of this divergence: the High-Performance Peak and the Essential Foundation. By focusing on where capital is most concentrated and where demand is most inelastic, we eliminate the risks associated with the \"fragile middle.\"",
+			"p3": "My strategies target the greatest areas of market misalignment where disciplined execution creates profound, intrinsic value. ATEX Group is the vehicle I trust to translate this vision into tangible, high-performing assets."
 		},
 		"section1": {
 			"title": "1. Thesis: The Mission-Driven Crisis",
 			"subtitle": "(Affordable & Senior Housing)",
 			"desc": "I believe in solving acute social crises with market-driven discipline, focusing on reliable demographics and stable incentives.",
-			"opportunity": "The Opportunity",
+			"opportunity": "The Opportunity: The Antifragile Base",
+			"p0_title": "The K-Shaped Hedge:",
+			"p0_text": "While inflation and rising costs squeeze the \"bottom arm\" of the economy, the demand for affordable senior housing becomes a structural necessity. We provide the infrastructure that supports the essential foundation of our community.",
 			"p1_title": "Senior Housing Implosion:",
 			"p1_text": "The aging of the Baby Boomer generation is an irreversible structural driver. The population aged 80 and over is projected to nearly double by 2035, creating an urgent, structural demand for affordable, tailored senior units.",
 			"p2_title": "Mission-Aligned Capital:",
@@ -43,9 +47,11 @@
 		},
 		"section2": {
 			"title": "2. Thesis: The Premium of Perfection",
-			"subtitle": "(Ultra-Luxury Residential)",
+			"subtitle": "(High-End Residential)",
 			"desc": "The highest returns are reserved for projects where scarcity and artistry create an irreplaceable asset. I ensure that financial discipline meets the visionary quality of bespoke design.",
-			"gateway": "The Global Gateway & Market Edge",
+			"gateway": "The Global Gateway & Market Edge: The Wealth Fortress",
+			"p0_title": "Capital Preservation:",
+			"p0_text": "In a K-shaped world, the \"top arm\" seeks \"Hard Assets\" to hedge against currency devaluation. Our high-end projects serve as a safe haven, attracting global liquidity that remains insulated from domestic interest rate cycles.",
 			"p1_title": "Irreplaceable South Florida Moat:",
 			"p1_text": "The market is structurally constrained by the Atlantic Ocean and the Everglades Development Boundary. This finite supply drives relentless price appreciation.",
 			"p2_title": "Global Wealth Influx:",
@@ -53,12 +59,12 @@
 			"p3_title": "Corporate Migration:",
 			"p3_text": "The region has attracted major financial and tech firms (e.g., Citadel, Goldman Sachs), driving up local high-income talent and reinforcing demand.",
 			"p4_title": "Market Resilience:",
-			"p4_text": "This liquidity ensures stability. High-end single-family home prices have more than doubled in recent years, and ultra-luxury transactions are dominated by cash purchases, demonstrating insulation from broad economic cycles.",
+			"p4_text": "This liquidity ensures stability. High-end single-family home prices have more than doubled in recent years, and luxury transactions are dominated by cash purchases, demonstrating insulation from broad economic cycles.",
 			"p5_title": "Value of Beauty:",
 			"p5_text": "I believe craftsmanship and bespoke architectural art are essential intrinsic value drivers that justify the premium and secure future asset resilience.",
 			"strategy": "Value Creation Strategy",
 			"s1_title": "Entitlement-First Exit:",
-			"s1_text": "We generate significant returns by securing all entitlements for the Best and Highest Use of land and then selling the \"shovel-ready\" asset. ATEX Group manages this high-risk bureaucratic phase, creating substantial value purely by mitigating development risk.",
+			"s1_text": "We generate significant returns by securing all entitlements for the Best and Highest Use of land and then selling the \"shovel-ready\" asset. We manage this high-risk bureaucratic phase, creating substantial value purely by mitigating development risk.",
 			"s2_title": "Investor Pipeline:",
 			"s2_text": "Our luxury clients naturally diversify their capital into our market rate and affordable housing ventures, creating a built-in investor lifecycle."
 		},
@@ -66,16 +72,19 @@
 			"title": "3. Thesis: Attainable Resilient Housing",
 			"subtitle": "(Market Rate & Outdoor Hospitality)",
 			"desc": "We focus on high-quality rental solutions that meet the needs of the modern renter and capitalize on low-maintenance asset classes.",
-			"market_rate": "Attainable Market Rate Housing",
+			"market_rate": "Attainable Market Rate Housing: The Displacement Opportunity",
 			"p1_title": "The Rental Necessity & Lifestyle:",
-			"p1_text": "High interest rates and soaring down payments have locked many out of homeownership. Separately, a growing segment of professionals values the flexibility and work-life balance that renting provides.",
+			"p1_text": "As the middle class is squeezed by the K-shaped economy, \"attainable\" becomes the new \"premium.\" High interest rates have locked many out of homeownership, creating a massive migration toward high-quality rental solutions.",
 			"p2_title": "Disciplined Focus:",
 			"p2_text": "I lead teams to develop Garden-Style apartments near major employment hubs (the ≤ 15-minute rule), ensuring resilient occupancy. We pursue projects only with a clear path to high-performance targets (IRR: 20%+; Equity Multiple: 1.8x+).",
 			"rv_parks": "Niche Focus: RV Parks (Land & Infrastructure)",
 			"rv1_title": "Low-CapEx, High-Resilience:",
 			"rv1_text": "We invest in the Land and Infrastructure only (roads, utilities) of modern RV parks. This model capitalizes on the market surge while minimizing the capital and maintenance costs of vertical construction.",
 			"rv2_title": "Recession-Resilience:",
-			"rv2_text": "The outdoor hospitality industry is recession-resilient, as travelers \"trade down\" to more affordable RV stays, resulting in consistent cash flow and growth for this asset class."
+			"rv2_text": "The outdoor hospitality industry is a primary beneficiary of the K-shaped economy. As travelers \"trade down\" to more affordable stays, our infrastructure sees consistent cash flow and growth."
+		},
+		"closing": {
+			"text": "As the Orchestra Director, I ensure we aren't just playing for the whole room—we are playing the two most powerful melodies in the market today. By balancing the Artistry of the Peak with the Reliability of the Base, we create a portfolio that is not just diversified, but Antifragile."
 		},
 		"art": {
 			"title": "Elevated Development",

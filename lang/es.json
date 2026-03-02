@@ -9,7 +9,6 @@
 		"b5": "Más",
 		"b6": "Desarrollo Comercial",
 		"b7": "Estudios de Viabilidad",
-
 		"p1": "Colección de Paisajes",
 		"p2": "Colección de Vida Silvestre",
 		"p3": "Colección Urbana",
@@ -25,16 +24,20 @@
 	},
 	"thesis": {
 		"title": "Mi Filosofía de Inversión",
-		"subtitle": "La Orquesta de Creación de Valor",
+		"subtitle": "La Sinfonía Bifurcada",
+		"orchestra_title": "La Orquesta de Creación de Valor",
 		"intro": {
 			"p1": "Veo los bienes raíces como la intersección crítica entre la belleza, el arte y una rigurosa aritmética financiera. Como Ingeniero Civil formado en Finanzas Inmobiliarias, sirvo como el Director de Orquesta, liderando equipos especializados para asegurar que cada proyecto esté perfectamente sincronizado. Si el diseño, el modelo financiero y el impacto en la comunidad no funcionan para todas las partes interesadas, \"la música no sonará\".",
-			"p2": "Mis estrategias apuntan a las mayores áreas de desajuste del mercado donde la ejecución disciplinada crea un valor intrínseco profundo. ATEX Group es el vehículo en el que confío para traducir esta visión en activos tangibles de alto rendimiento."
+			"p2": "En el panorama económico cada vez más polarizado de hoy—la recuperación en \"forma de K\"—el mercado medio está plagado de volatilidad. He posicionado intencionalmente mi portafolio en los dos puntos más resilientes de esta divergencia: el Pico de Alto Rendimiento y la Fundación Esencial. Al enfocarnos en donde el capital está más concentrado y donde la demanda es más inelástica, eliminamos los riesgos asociados con el \"frágil medio\".",
+			"p3": "Mis estrategias apuntan a las mayores áreas de desajuste del mercado donde la ejecución disciplinada crea un valor intrínseco profundo. ATEX Group es el vehículo en el que confío para traducir esta visión en activos tangibles de alto rendimiento."
 		},
 		"section1": {
 			"title": "1. Tesis: La Crisis Impulsada por la Misión",
 			"subtitle": "(Vivienda Asequible y para Personas Mayores)",
 			"desc": "Creo en resolver crisis sociales agudas con disciplina impulsada por el mercado, enfocándome en demografías confiables e incentivos estables.",
-			"opportunity": "La Oportunidad",
+			"opportunity": "La Oportunidad: La Base Antifrágil",
+			"p0_title": "La Cobertura de la Economía en K:",
+			"p0_text": "Mientras la inflación y el aumento de costos exprimen el \"brazo inferior\" de la economía, la demanda de vivienda asequible para personas mayores se convierte en una necesidad estructural. Proporcionamos la infraestructura que sostiene la base esencial de nuestra comunidad.",
 			"p1_title": "Implosión de Vivienda para Personas Mayores:",
 			"p1_text": "El envejecimiento de la generación Baby Boomer es un motor estructural irreversible. Se proyecta que la población de 80 años o más casi se duplique para 2035, creando una demanda estructural urgente de unidades asequibles y adaptadas para personas mayores.",
 			"p2_title": "Capital Alineado con la Misión:",
@@ -44,9 +47,11 @@
 		},
 		"section2": {
 			"title": "2. Tesis: La Prima de la Perfección",
-			"subtitle": "(Residencial de Ultra Lujo)",
+			"subtitle": "(Residencial de Alta Gama)",
 			"desc": "Los retornos más altos están reservados para proyectos donde la escasez y el arte crean un activo irreemplazable. Aseguro que la disciplina financiera se encuentre con la calidad visionaria del diseño a medida.",
-			"gateway": "La Puerta Global y Ventaja de Mercado",
+			"gateway": "La Puerta Global y Ventaja de Mercado: La Fortaleza de Riqueza",
+			"p0_title": "Preservación de Capital:",
+			"p0_text": "En un mundo en forma de K, el \"brazo superior\" busca \"Activos Duros\" para cubrirse contra la devaluación monetaria. Nuestros proyectos de alta gama sirven como refugio seguro, atrayendo liquidez global que permanece aislada de los ciclos domésticos de tasas de interés.",
 			"p1_title": "Foso Irreemplazable del Sur de Florida:",
 			"p1_text": "El mercado está estructuralmente limitado por el Océano Atlántico y el Límite de Desarrollo de los Everglades. Esta oferta finita impulsa una apreciación de precios implacable.",
 			"p2_title": "Afluencia de Riqueza Global:",
@@ -54,29 +59,32 @@
 			"p3_title": "Migración Corporativa:",
 			"p3_text": "La región ha atraído a importantes firmas financieras y tecnológicas (por ejemplo, Citadel, Goldman Sachs), impulsando el talento local de altos ingresos y reforzando la demanda.",
 			"p4_title": "Resiliencia del Mercado:",
-			"p4_text": "Esta liquidez asegura estabilidad. Los precios de las viviendas unifamiliares de alta gama se han más que duplicado en los últimos años, y las transacciones de ultra lujo están dominadas por compras en efectivo, demostrando aislamiento de los ciclos económicos amplios.",
+			"p4_text": "Esta liquidez asegura estabilidad. Los precios de las viviendas unifamiliares de alta gama se han más que duplicado en los últimos años, y las transacciones de lujo están dominadas por compras en efectivo, demostrando aislamiento de los ciclos económicos amplios.",
 			"p5_title": "Valor de la Belleza:",
 			"p5_text": "Creo que la artesanía y el arte arquitectónico a medida son impulsores esenciales de valor intrínseco que justifican la prima y aseguran la resiliencia futura del activo.",
 			"strategy": "Estrategia de Creación de Valor",
 			"s1_title": "Salida Primero con Derechos:",
-			"s1_text": "Generamos retornos significativos asegurando todos los derechos para el Mejor y Más Alto Uso de la tierra y luego vendiendo el activo \"listo para construir\". ATEX Group gestiona esta fase burocrática de alto riesgo, creando un valor sustancial puramente al mitigar el riesgo de desarrollo.",
+			"s1_text": "Generamos retornos significativos asegurando todos los derechos para el Mejor y Más Alto Uso de la tierra y luego vendiendo el activo \"listo para construir\". Gestionamos esta fase burocrática de alto riesgo, creando un valor sustancial puramente al mitigar el riesgo de desarrollo.",
 			"s2_title": "Flujo de Inversores:",
-			"s2_text": "Nuestros clientes de lujo diversifican naturalmente su capital en nuestras empresas de tasa de mercado y vivienda asequible, creando un ciclo de vida de inversor incorporado."
+			"s2_text": "Nuestros clientes de alta gama diversifican naturalmente su capital en nuestras empresas de tasa de mercado y vivienda asequible, creando un ciclo de vida de inversor incorporado."
 		},
 		"section3": {
 			"title": "3. Tesis: Vivienda Resiliente Asequible",
 			"subtitle": "(Tasa de Mercado y Hospitalidad al Aire Libre)",
 			"desc": "Nos enfocamos en soluciones de alquiler de alta calidad que satisfacen las necesidades del inquilino moderno y capitalizan clases de activos de bajo mantenimiento.",
-			"market_rate": "Vivienda a Tasa de Mercado Asequible",
+			"market_rate": "Vivienda a Tasa de Mercado Asequible: La Oportunidad de Desplazamiento",
 			"p1_title": "La Necesidad y Estilo de Vida del Alquiler:",
-			"p1_text": "Las altas tasas de interés y los pagos iniciales elevados han dejado a muchos fuera de la propiedad de vivienda. Por separado, un segmento creciente de profesionales valora la flexibilidad y el equilibrio entre trabajo y vida que proporciona el alquiler.",
+			"p1_text": "A medida que la clase media es presionada por la economía en forma de K, lo \"asequible\" se convierte en el nuevo \"premium\". Las altas tasas de interés han dejado a muchos fuera de la propiedad de vivienda, creando una migración masiva hacia soluciones de alquiler de alta calidad.",
 			"p2_title": "Enfoque Disciplinado:",
 			"p2_text": "Lidero equipos para desarrollar apartamentos estilo jardín cerca de los principales centros de empleo (la regla de ≤ 15 minutos), asegurando una ocupación resiliente. Perseguimos proyectos solo con un camino claro hacia objetivos de alto rendimiento (TIR: 20%+; Múltiplo de Equidad: 1.8x+).",
 			"rv_parks": "Enfoque de Nicho: Parques de RV (Tierra e Infraestructura)",
 			"rv1_title": "Bajo CapEx, Alta Resiliencia:",
 			"rv1_text": "Invertimos en la Tierra e Infraestructura solamente (carreteras, servicios públicos) de parques de RV modernos. Este modelo capitaliza el auge del mercado mientras minimiza los costos de capital y mantenimiento de la construcción vertical.",
 			"rv2_title": "Resiliencia a la Recesión:",
-			"rv2_text": "La industria de la hospitalidad al aire libre es resistente a la recesión, ya que los viajeros \"bajan de categoría\" a estancias en RV más asequibles, lo que resulta en un flujo de caja constante y crecimiento para esta clase de activos."
+			"rv2_text": "La industria de la hospitalidad al aire libre es un beneficiario principal de la economía en forma de K. A medida que los viajeros \"bajan de categoría\" a estancias más asequibles, nuestra infraestructura registra un flujo de caja constante y crecimiento."
+		},
+		"closing": {
+			"text": "Como el Director de Orquesta, me aseguro de que no solo estemos tocando para toda la sala, sino que estemos tocando las dos melodías más poderosas del mercado actual. Al equilibrar la Maestría del Pico con la Confiabilidad de la Base, creamos un portafolio que no solo es diversificado, sino Antifrágil."
 		},
 		"art": {
 			"title": "Desarrollo Elevado",
